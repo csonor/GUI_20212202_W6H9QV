@@ -4,9 +4,87 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ColorCross"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        xmlns:local1="clr-namespace:ColorCross.ViewModel"
+        
+       mc:Ignorable="d"     
+        Title="MainWindow" Height="450" Width="800"
+        WindowStyle="None"
+        Background="#9c7200"
+        ResizeMode="CanResizeWithGrip"
+        AllowsTransparency="True">
+    <Window.DataContext>
+        <local1:MainWindowViewModel></local1:MainWindowViewModel>
+    </Window.DataContext>
+        <Border MouseDown="Border_MouseDown">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  Width="0.25*"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Background="#ebac00"
+              Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
 
-    </Grid>
+                </Grid.ColumnDefinitions>
+                <Button Content="Játék"
+                       Grid.Column="0"
+                        Background="Transparent"
+                       BorderThickness="0"
+                       Foreground="White"
+                       Padding="10"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontFamily="Fonts/#redhat"
+                       FontWeight="Medium"
+                       Command="{Binding OpenGameMenuCommand}"    
+                           />
+
+                <Button Content="Beállítások"
+                       Grid.Column="1"
+                       Background="Transparent"
+                       BorderThickness="0"
+                       Foreground="White"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontFamily="Fonts/#redhat"
+                       FontWeight="Medium"
+                       Command="{Binding OpenSettingsCommand}"
+                      />
+                <Button Content="Súgó"
+                       Grid.Column="2"
+                       Background="Transparent"
+                       BorderThickness="0"
+                       Foreground="White"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontFamily="Fonts/#redhat"
+                       FontWeight="Medium"
+                        Command="{Binding OpenHelpCommand}"
+                      />
+                <StackPanel Grid.Column="4" Margin="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" >
+                    <Button x:Name="max" Click="max_Click" Background="#9c7200" Foreground="White" Width="20" Height="15" Margin="5,0,5,0" FontSize="8px" FontFamily="Fonts/#webdings">1</Button>
+                    <Button x:Name="min" Click="min_Click" Background="#9c7200" Foreground="White" Width="20" Height="15" Margin="5,0,5,0" FontSize="8" Grid.Column="4" Content="-"></Button>
+                    <Button x:Name="exit" Click="exit_Click"  Background="#9c7200" Foreground="White" Width="20" Height="15" Margin="10,0,5,0" FontSize="8px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >X</Button>
+                </StackPanel>
+            </Grid>
+
+            <ContentControl Grid.ColumnSpan="2" Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="10"
+                            BorderThickness="0"
+                            Content="{Binding CurrentView}"
+                            />
+
+
+        </Grid>
+    </Border>
 </Window>
