@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="ColorCross.UserControls.HelpUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ColorCross.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <TextBox 
+            Name="tbMultiLine"
+            TextAlignment="Justify"
+            FontSize="20"
+            FontFamily="Fonts/#redhat"           
+            TextWrapping="Wrap"
+            AcceptsReturn="True"
+            VerticalScrollBarVisibility="Disabled"  Padding="10" Foreground="White" Background="#9c7200" Text="A ColorcrossBCsZ egy logikán alapuló pixel színező.
+A játék célja, hogy a pixeleket kiszínezve megkapjuk a pályán elrejtett képet. 
+A pixelek helyes színezését a rajzterület mellett lévő táblázat adatai teszik lehetővé. Ebben 
+megtalálható, hogy melyik sorban, illetve oszlopban összefüggően hány darab egyszínű pixel 
+van egymás mellett. A számokat balról jobbra, illetve fentről lefelé olvasva kell figyelembe 
+venni. A fehér pixelek számát nem mutatja a táblázat (az alap képek esetén), mivel a képek 
+háttere is ezzel a színnel van kitöltve, így ezen adattal túl egyszerű lenne megfejteni a 
+képeket. 
+A képek alatt/mellett a felhasználandó színek listáját találjuk meg. Innen tudjuk kiválasztani, 
+hogy milyen színnel szeretnénk színezni. A pixelek akárhányszor újraszínezhetőek, így akár a 
+már helyesen kiszínezett pixelt is el tudjuk rontani egy rossz döntés esetén. A pálya akkor 
+van kész, ha minden pixel helyesen van kiszínezve. 
+A következő képen egy feladatot láthatunk, mellette pedig a megoldását. Itt is látszik, hogy a 
+különböző színek nem feltétlenül egymás mellett kezdődnek."/>
+    </Grid>
+</UserControl>
