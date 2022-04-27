@@ -19,15 +19,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\frog.bmp">
+    <Content Include="Images\frog.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\girl.bmp">
+    </Content>
+    <Content Include="Images\girl.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\sagittarius.bmp">
+    </Content>
+    <Content Include="Images\sagittarius.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
   </ItemGroup>
 
 </Project>
