@@ -34,13 +34,13 @@ namespace ColorCross.ViewModel
         public HelpUserControl HelpView { get; set; }
 
         public RelayCommand OpenGameMenuCommand { get; set; }
-        public GameMenuUserControl GameMenuView { get; set; }
+        public LevelSelectUserControl GameMenuView { get; set; }
 
 
         public MainWindowViewModel()
         {
 
-            GameMenuView = new GameMenuUserControl();
+            GameMenuView = new LevelSelectUserControl();
             SettingsView = new SettingsUserControl();
             HelpView = new HelpUserControl();
             currentView = GameMenuView;
