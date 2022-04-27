@@ -89,5 +89,13 @@ namespace ColorCross.Backend
 				columns[i].IsDone = false;
 			}
 		}
+
+		int[] GetRowAndColumnFromId(int id)
+		{
+			int[] rowCol = new int[2];
+			rowCol[0] = id / bmp.Width;
+			rowCol[1] = id % bmp.Width;
+			return rowCol;
+		}
 	}
 }
