@@ -28,14 +28,13 @@ namespace ColorCross.Logic
 
 		public ColorCrossLogic()
 		{
-
 			pixels = new Color[0, 0];
 			colors = new List<Color>();
-			rows = new LineOfColors[0];
-			columns = new LineOfColors[0];
+			rows = Array.Empty<LineOfColors>();
+			columns = Array.Empty<LineOfColors>();
 			numberOfColoredLinesAndColumns = 0;
 			currentCorrectLines = 0;
-			bmp = new Bitmap(0, 0);
+			bmp = new Bitmap(1, 1);
 		}
 
 		public void ImageReader(string fileName)
@@ -43,7 +42,27 @@ namespace ColorCross.Logic
 			bmp = new Bitmap(fileName);
 			rows = new LineOfColors[bmp.Height];
 			columns = new LineOfColors[bmp.Width];
+			pixels = new Color[bmp.Height, bmp.Width];
 
+			CreatePixelMatrix();
+			CountUniqueColors();
+			CountRowColors();
+			CountColumnColors();
+		}
+
+		void CreatePixelMatrix()
+		{
+			for (int i = 0; i < pixels.GetLength(0); i++)
+			{
+				for (int j = 0; j < pixels.GetLength(1); j++)
+				{
+					pixels[i, j] = Color.FromArgb(0, 0, 0, 0);
+				}
+			}
+		}
+
+		void CountUniqueColors()
+		{
 			for (int i = 0; i < bmp.Height; i++)
 			{
 				for (int j = 0; j < bmp.Width; j++)
@@ -54,8 +73,6 @@ namespace ColorCross.Logic
 						colors.Add(newColor);
 				}
 			}
-			CountRowColors();
-			CountColumnColors();
 		}
 
 		void CountRowColors()
@@ -76,12 +93,13 @@ namespace ColorCross.Logic
 					if (color.Name != "0")
 					{
 						if (rows[i].Colors == null)
-							rows[i].Colors = new List<ColorNumber>();
-						rows[i].Colors.Add(new ColorNumber { Color = newColor, Count = sum + 1 });
+							rows[i].Colors = new List<LineOfColors.ColorNumber>();
+						rows[i].Colors.Add(new LineOfColors.ColorNumber { Color = newColor, Count = sum + 1 });
 					}
 					j = k - 1;
 				}
 				rows[i].IsDone = false;
+				numberOfColoredLinesAndColumns++;
 			}
 		}
 
@@ -103,13 +121,91 @@ namespace ColorCross.Logic
 					if (color.Name != "0")
 					{
 						if (columns[i].Colors == null)
-							columns[i].Colors = new List<ColorNumber>();
-						columns[i].Colors.Add(new ColorNumber { Color = newColor, Count = sum + 1 });
+							columns[i].Colors = new List<LineOfColors.ColorNumber>();
+						columns[i].Colors.Add(new LineOfColors.ColorNumber { Color = newColor, Count = sum + 1 });
 					}
 					j = k - 1;
 				}
 				columns[i].IsDone = false;
+				numberOfColoredLinesAndColumns++;
 			}
+		}
+
+		public bool ColorCheck(int i, int j)
+		{
+			if (RowCheck(i))
+			{
+				if (!Rows[i].IsDone)
+				{
+					currentCorrectLines++;
+					Rows[i].IsDone = true;
+				}
+			}
+			else if (Rows[i].IsDone)
+			{
+				currentCorrectLines--;
+				Rows[i].IsDone = false;
+			}
+
+			if (ColumnCheck(j))
+			{
+				if (!Columns[j].IsDone)
+				{
+					currentCorrectLines++;
+					Columns[j].IsDone = true;
+				}
+			}
+			else if (Columns[j].IsDone)
+			{
+				currentCorrectLines--;
+				Columns[j].IsDone = false;
+			}
+
+			return numberOfColoredLinesAndColumns == currentCorrectLines;
+		}
+
+		bool RowCheck(int i)
+		{
+			var rowColors = new List<LineOfColors.ColorNumber>();
+			for (int j = 0; j < pixels.GetLength(1); j++)
+			{
+				int k = j + 1;
+				int sum = 0;
+				var color = pixels[i, j];
+				while (k < pixels.GetLength(1) && pixels[i, j] == color)
+				{
+					sum++;
+					k++;
+				}
+				if (color.ToString() != "#00000000")
+				{
+					rowColors.Add(new LineOfColors.ColorNumber { Color = color, Count = sum + 1 });
+				}
+				j = k - 1;
+			}
+			return rowColors.SequenceEqual(Rows[i].Colors);
+		}
+
+		bool ColumnCheck(int j)
+		{
+			var columnColors = new List<LineOfColors.ColorNumber>();
+			for (int i = 0; i < pixels.GetLength(0); i++)
+			{
+				int k = i + 1;
+				int sum = 0;
+				var color = pixels[i, j];
+				while (k < pixels.GetLength(0) && pixels[i, j] == color)
+				{
+					sum++;
+					k++;
+				}
+				if (color.ToString() != "#00000000")
+				{
+					columnColors.Add(new LineOfColors.ColorNumber { Color = color, Count = sum + 1 });
+				}
+				i = k - 1;
+			}
+			return columnColors.SequenceEqual(Columns[j].Colors);
 		}
 	}
 }
