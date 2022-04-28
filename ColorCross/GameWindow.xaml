@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:ColorCross"
         mc:Ignorable="d"
         Title="GameWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="#9c7200">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="clocktxtblock" FontSize="15" ></TextBlock>
         
     </Grid>
 </Window>
