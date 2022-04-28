@@ -172,7 +172,7 @@ namespace ColorCross.Logic
 				int k = j + 1;
 				int sum = 0;
 				var color = pixels[i, j];
-				while (k < pixels.GetLength(1) && pixels[i, j] == color)
+				while (k < pixels.GetLength(1) && pixels[i, k] == color)
 				{
 					sum++;
 					k++;
@@ -194,7 +194,7 @@ namespace ColorCross.Logic
 				int k = i + 1;
 				int sum = 0;
 				var color = pixels[i, j];
-				while (k < pixels.GetLength(0) && pixels[i, j] == color)
+				while (k < pixels.GetLength(0) && pixels[k, j] == color)
 				{
 					sum++;
 					k++;
@@ -206,6 +206,11 @@ namespace ColorCross.Logic
 				i = k - 1;
 			}
 			return columnColors.SequenceEqual(Columns[j].Colors);
+		}
+
+		public void ChangePixelColor(System.Windows.Media.Brush brush, int i, int j)
+		{
+			pixels[i, j] = ((SolidColorBrush)brush).Color;
 		}
 	}
 }
