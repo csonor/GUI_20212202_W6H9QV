@@ -18,6 +18,8 @@ namespace ColorCross.Logic
 		List<Color> colors;
 		LineOfColors[] rows;
 		LineOfColors[] columns;
+		int numberOfColoredLinesAndColumns;
+		int currentCorrectLines;
 		Bitmap bmp;
 
 		public LineOfColors[] Rows { get => rows; }
@@ -26,7 +28,14 @@ namespace ColorCross.Logic
 
 		public ColorCrossLogic()
 		{
+
+			pixels = new Color[0, 0];
 			colors = new List<Color>();
+			rows = new LineOfColors[0];
+			columns = new LineOfColors[0];
+			numberOfColoredLinesAndColumns = 0;
+			currentCorrectLines = 0;
+			bmp = new Bitmap(0, 0);
 		}
 
 		public void ImageReader(string fileName)
@@ -44,34 +53,9 @@ namespace ColorCross.Logic
 					if (!colors.Contains(newColor) && color.Name != "0")
 						colors.Add(newColor);
 				}
-				CountRowColors();
-				CountColumnColors();
 			}
-		}
-
-		public Button[] CreateButtons()
-		{
-			pixels = new Color[bmp.Height, bmp.Width];
-			for (int i = 0; i < pixels.GetLength(0); i++)
-			{
-				for (int j = 0; j < pixels.GetLength(1); j++)
-				{
-					pixels[i, j] = Color.FromArgb(0, 0, 0, 0);
-				}
-			}
-
-			var buttons = new Button[bmp.Width * bmp.Height];
-			for (int i = 0; i < buttons.Length; i++)
-			{
-				buttons[i] = new Button
-				{
-					Name = i.ToString(),
-					Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)),
-					BorderThickness = new System.Windows.Thickness(0),
-					Command = new RoutedCommand() //TODO button chamge method
-				};
-			}
-			return buttons;
+			CountRowColors();
+			CountColumnColors();
 		}
 
 		void CountRowColors()
@@ -126,14 +110,6 @@ namespace ColorCross.Logic
 				}
 				columns[i].IsDone = false;
 			}
-		}
-
-		int[] GetRowAndColumnFromId(int id)
-		{
-			int[] rowCol = new int[2];
-			rowCol[0] = id / bmp.Width;
-			rowCol[1] = id % bmp.Width;
-			return rowCol;
 		}
 	}
 }

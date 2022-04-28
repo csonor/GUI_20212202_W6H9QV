@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ColorCross.UserControls
+namespace ColorCross
 {
     /// <summary>
-    /// Interaction logic for GameMenuUserControl.xaml
+    /// Interaction logic for GameWindow.xaml
     /// </summary>
-    public partial class GameMenuUserControl : UserControl
+    public partial class GameWindow : Window
     {
-        public GameMenuUserControl()
+        public GameWindow(string Path)
         {
             InitializeComponent();
         }

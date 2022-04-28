@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ColorCross.UserControls.GameMenuUserControl"
+﻿<UserControl x:Class="ColorCross.UserControls.LevelSelectUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,10 +8,9 @@
              d:DesignHeight="450" d:DesignWidth="800"
                  Background="#9c7200">
     <Grid>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left">
-            <Button Content="Játék kezdése" Width="300" HorizontalContentAlignment="Left" Height="50" FontSize="40" Background="Transparent" BorderThickness="0" Foreground="White" Margin="20"/>
-            <Button Content="Feladvány készítő" Width="400" Height="50" FontSize="40" Background="Transparent" BorderThickness="0" Foreground="White" Margin="20"/>
-        </StackPanel>
+        <WrapPanel x:Name="wrp">
+            
+        </WrapPanel>
 
     </Grid>
 </UserControl>
