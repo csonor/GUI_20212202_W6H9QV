@@ -18,6 +18,8 @@ namespace ColorCross.Logic
 		List<Color> colors;
 		LineOfColors[] rows;
 		LineOfColors[] columns;
+		int numberOfColoredLinesAndColumns;
+		int currentCorrectLines;
 		Bitmap bmp;
 
 		public LineOfColors[] Rows { get => rows; }
@@ -26,7 +28,14 @@ namespace ColorCross.Logic
 
 		public ColorCrossLogic()
 		{
+
+			pixels = new Color[0, 0];
 			colors = new List<Color>();
+			rows = new LineOfColors[0];
+			columns = new LineOfColors[0];
+			numberOfColoredLinesAndColumns = 0;
+			currentCorrectLines = 0;
+			bmp = new Bitmap(0, 0);
 		}
 
 		public void ImageReader(string fileName)
