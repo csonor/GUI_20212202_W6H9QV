@@ -58,31 +58,6 @@ namespace ColorCross.Logic
 			CountColumnColors();
 		}
 
-		public Button[] CreateButtons()
-		{
-			pixels = new Color[bmp.Height, bmp.Width];
-			for (int i = 0; i < pixels.GetLength(0); i++)
-			{
-				for (int j = 0; j < pixels.GetLength(1); j++)
-				{
-					pixels[i, j] = Color.FromArgb(0, 0, 0, 0);
-				}
-			}
-
-			var buttons = new Button[bmp.Width * bmp.Height];
-			for (int i = 0; i < buttons.Length; i++)
-			{
-				buttons[i] = new Button
-				{
-					Name = i.ToString(),
-					Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)),
-					BorderThickness = new System.Windows.Thickness(0),
-					Command = new RoutedCommand() //TODO button chamge method
-				};
-			}
-			return buttons;
-		}
-
 		void CountRowColors()
 		{
 			for (int i = 0; i < rows.Length; i++)
@@ -135,14 +110,6 @@ namespace ColorCross.Logic
 				}
 				columns[i].IsDone = false;
 			}
-		}
-
-		int[] GetRowAndColumnFromId(int id)
-		{
-			int[] rowCol = new int[2];
-			rowCol[0] = id / bmp.Width;
-			rowCol[1] = id % bmp.Width;
-			return rowCol;
 		}
 	}
 }
