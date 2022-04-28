@@ -44,9 +44,9 @@ namespace ColorCross.Logic
 					if (!colors.Contains(newColor) && color.Name != "0")
 						colors.Add(newColor);
 				}
-				CountRowColors();
-				CountColumnColors();
 			}
+			CountRowColors();
+			CountColumnColors();
 		}
 
 		public Button[] CreateButtons()
