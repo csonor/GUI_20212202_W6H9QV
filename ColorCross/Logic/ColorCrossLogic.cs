@@ -47,15 +47,10 @@ namespace ColorCross.Logic
 			rows = new LineOfColors[bmp.Height];
 			columns = new LineOfColors[bmp.Width];
 
-			pixels = new Color[bmp.Height][];
-			for (int i = 0; i < pixels.Length; i++)
-			{
-				pixels[i] = new Color[bmp.Width];
-			}
-
 			fileName = new string(filePath.Split('\\')[1].TakeWhile(x => x != '.').ToArray());
 			if (File.Exists(fileName + ".json"))
 				LoadPixelsFromFile();
+			else CreatePixelArray();
 
 			CountUniqueColors();
 			CountRowColors();
@@ -66,6 +61,15 @@ namespace ColorCross.Logic
 		{
 			var json = File.ReadAllText(fileName + ".json");
 			pixels = JsonSerializer.Deserialize<Color[][]>(json);
+		}
+
+		void CreatePixelArray()
+		{
+			pixels = new Color[bmp.Height][];
+			for (int i = 0; i < pixels.Length; i++)
+			{
+				pixels[i] = new Color[bmp.Width];
+			}
 		}
 
 		void CountUniqueColors()
@@ -231,6 +235,14 @@ namespace ColorCross.Logic
 				var json = JsonSerializer.Serialize(pixels, typeof(Color[][]));
 				File.WriteAllText($"{fileName}.json", json);
 			}
+		}
+
+		public void ResetGame()
+		{
+			var path = fileName + ".json";
+			if (File.Exists(path))
+				File.Delete(path);
+			CreatePixelArray();
 		}
 	}
 }
