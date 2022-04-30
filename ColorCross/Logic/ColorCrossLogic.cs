@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -22,6 +23,7 @@ namespace ColorCross.Logic
 		int numberOfColoredLinesAndColumns;
 		int currentCorrectLines;
 		Bitmap bmp;
+		string fileName;
 
 		public LineOfColors[] Rows { get => rows; }
 		public LineOfColors[] Columns { get => columns; }
@@ -36,6 +38,7 @@ namespace ColorCross.Logic
 			numberOfColoredLinesAndColumns = 0;
 			currentCorrectLines = 0;
 			bmp = new Bitmap(1, 1);
+			fileName = string.Empty;
 		}
 
 		public void ImageReader(string filePath)
@@ -45,26 +48,24 @@ namespace ColorCross.Logic
 			columns = new LineOfColors[bmp.Width];
 
 			pixels = new Color[bmp.Height][];
+			for (int i = 0; i < pixels.Length; i++)
+			{
+				pixels[i] = new Color[bmp.Width];
+			}
 
+			fileName = new string(filePath.Split('\\')[1].TakeWhile(x => x != '.').ToArray());
+			if (File.Exists(fileName + ".json"))
+				LoadPixelsFromFile();
 
 			CountUniqueColors();
 			CountRowColors();
 			CountColumnColors();
 		}
 
-		void CreatePixelMatrix()
+		void LoadPixelsFromFile()
 		{
-			for (int i = 0; i < pixels.Length; i++)
-			{
-				pixels[i] = new Color[bmp.Width];
-			}
-			for (int i = 0; i < pixels.Length; i++)
-			{
-				for (int j = 0; j < pixels[i].Length; j++)
-				{
-					pixels[i][j] = Color.FromArgb(0, 0, 0, 0);
-				}
-			}
+			var json = File.ReadAllText(fileName + ".json");
+			pixels = JsonSerializer.Deserialize<Color[][]>(json);
 		}
 
 		void CountUniqueColors()
@@ -178,7 +179,7 @@ namespace ColorCross.Logic
 				int k = j + 1;
 				int sum = 0;
 				var color = pixels[i][j];
-				while (k < pixels.GetLength(1) && pixels[i][k] == color)
+				while (k < pixels[i].Length && pixels[i][k] == color)
 				{
 					sum++;
 					k++;
@@ -200,7 +201,7 @@ namespace ColorCross.Logic
 				int k = i + 1;
 				int sum = 0;
 				var color = pixels[i][j];
-				while (k < pixels.GetLength(0) && pixels[k][j] == color)
+				while (k < pixels.Length && pixels[k][j] == color)
 				{
 					sum++;
 					k++;
@@ -217,6 +218,19 @@ namespace ColorCross.Logic
 		public void ChangePixelColor(System.Windows.Media.Brush brush, int i, int j)
 		{
 			pixels[i][j] = ((SolidColorBrush)brush).Color;
+		}
+
+		public void GameEnd(bool isCompleted)
+		{
+			if (isCompleted)
+			{
+				//TODO map done
+			}
+			else
+			{
+				var json = JsonSerializer.Serialize(pixels, typeof(Color[][]));
+				File.WriteAllText($"{fileName}.json", json);
+			}
 		}
 	}
 }
