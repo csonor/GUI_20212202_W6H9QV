@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace ColorCross.Logic
 {
 	class ColorCrossLogic
 	{
-		Color[,] pixels;
+		Color[][] pixels;
 		List<Color> colors;
 		LineOfColors[] rows;
 		LineOfColors[] columns;
@@ -28,7 +29,7 @@ namespace ColorCross.Logic
 
 		public ColorCrossLogic()
 		{
-			pixels = new Color[0, 0];
+			pixels = Array.Empty<Color[]>();
 			colors = new List<Color>();
 			rows = Array.Empty<LineOfColors>();
 			columns = Array.Empty<LineOfColors>();
@@ -37,14 +38,15 @@ namespace ColorCross.Logic
 			bmp = new Bitmap(1, 1);
 		}
 
-		public void ImageReader(string fileName)
+		public void ImageReader(string filePath)
 		{
-			bmp = new Bitmap(fileName);
+			bmp = new Bitmap(filePath);
 			rows = new LineOfColors[bmp.Height];
 			columns = new LineOfColors[bmp.Width];
-			pixels = new Color[bmp.Height, bmp.Width];
 
-			CreatePixelMatrix();
+			pixels = new Color[bmp.Height][];
+
+
 			CountUniqueColors();
 			CountRowColors();
 			CountColumnColors();
@@ -52,11 +54,15 @@ namespace ColorCross.Logic
 
 		void CreatePixelMatrix()
 		{
-			for (int i = 0; i < pixels.GetLength(0); i++)
+			for (int i = 0; i < pixels.Length; i++)
 			{
-				for (int j = 0; j < pixels.GetLength(1); j++)
+				pixels[i] = new Color[bmp.Width];
+			}
+			for (int i = 0; i < pixels.Length; i++)
+			{
+				for (int j = 0; j < pixels[i].Length; j++)
 				{
-					pixels[i, j] = Color.FromArgb(0, 0, 0, 0);
+					pixels[i][j] = Color.FromArgb(0, 0, 0, 0);
 				}
 			}
 		}
@@ -167,12 +173,12 @@ namespace ColorCross.Logic
 		bool RowCheck(int i)
 		{
 			var rowColors = new List<LineOfColors.ColorNumber>();
-			for (int j = 0; j < pixels.GetLength(1); j++)
+			for (int j = 0; j < pixels[i].Length; j++)
 			{
 				int k = j + 1;
 				int sum = 0;
-				var color = pixels[i, j];
-				while (k < pixels.GetLength(1) && pixels[i, k] == color)
+				var color = pixels[i][j];
+				while (k < pixels.GetLength(1) && pixels[i][k] == color)
 				{
 					sum++;
 					k++;
@@ -189,12 +195,12 @@ namespace ColorCross.Logic
 		bool ColumnCheck(int j)
 		{
 			var columnColors = new List<LineOfColors.ColorNumber>();
-			for (int i = 0; i < pixels.GetLength(0); i++)
+			for (int i = 0; i < pixels.Length; i++)
 			{
 				int k = i + 1;
 				int sum = 0;
-				var color = pixels[i, j];
-				while (k < pixels.GetLength(0) && pixels[k, j] == color)
+				var color = pixels[i][j];
+				while (k < pixels.GetLength(0) && pixels[k][j] == color)
 				{
 					sum++;
 					k++;
@@ -210,7 +216,7 @@ namespace ColorCross.Logic
 
 		public void ChangePixelColor(System.Windows.Media.Brush brush, int i, int j)
 		{
-			pixels[i, j] = ((SolidColorBrush)brush).Color;
+			pixels[i][j] = ((SolidColorBrush)brush).Color;
 		}
 	}
 }
