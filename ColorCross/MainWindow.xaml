@@ -59,6 +59,18 @@
                        FontWeight="Medium"
                        Command="{Binding OpenSettingsCommand}"
                       />
+                <Button Content="Eredmények"
+                       Grid.Column="3"
+                        Background="Transparent"
+                       BorderThickness="0"
+                       Foreground="White"
+                       Padding="10"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontFamily="Fonts/#redhat"
+                       FontWeight="Medium"
+                       Command="{Binding OpenScoreBoardCommand}"    
+                           />
                 <Button Content="Súgó"
                        Grid.Column="2"
                        Background="Transparent"
