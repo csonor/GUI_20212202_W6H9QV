@@ -17,7 +17,7 @@
             <RowDefinition Height="3*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="clocktxtblock" FontSize="15" ></TextBlock>
+        <TextBlock x:Name="clocktxtblock" FontSize="15" Foreground="White" ></TextBlock>
         
     </Grid>
 </Window>
