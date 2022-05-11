@@ -3,8 +3,6 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:local="clr-namespace:ColorCross"
-		xmlns:vm="clr-namespace:ColorCross.ViewModel"
 		xmlns:ui="clr-namespace:ColorCross.UI"
 		mc:Ignorable="d"
 		Closed="Window_Closed"
@@ -14,12 +12,22 @@
 		Background="LightGray">
 	<Window.Resources>
 		<ui:IntToColorConverter x:Key="IntToColorConverter" />
+        <ui:SelectedIntToColorConverter x:Key="SelectedIntToColorConverter" />
         <ui:BoolToBackGroundConverter x:Key="BoolToBackGroundConverter" />
 		<ui:IntToColorTextConverter x:Key="IntToColorTextConverter" />
         
 		<DataTemplate x:Key="DataTemplate_colors" >
-			<Button Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}" Width="40" Height="40" Click="ColorButton_Click" BorderThickness="2" />
-		</DataTemplate>
+            <Button Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}" 
+                    Width="40" Height="40" Click="ColorButton_Click" BorderThickness="2" >
+
+                <Button.BorderBrush>
+                    <MultiBinding Converter="{StaticResource SelectedIntToColorConverter}">
+                        <Binding Path="Color"/>
+                        <Binding Path="DataContext.SelectedColor" ElementName="GameDatas"/>
+                    </MultiBinding>
+                </Button.BorderBrush>
+            </Button>
+        </DataTemplate>
 
 		<DataTemplate x:Key="DataTemplate_cols">
             <Button Content="{Binding Path=Count}" Foreground="{Binding Path=Color, Converter={StaticResource IntToColorTextConverter}}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}"  Height="20" Width="20" Margin="1,1,1,1" IsHitTestVisible="False" FontSize="12"/>
@@ -90,12 +98,12 @@
                 <ItemsControl x:Name="lst" ItemTemplate="{DynamicResource DataTemplate_Level1}" Grid.Column="0" Grid.Row="0" BorderThickness="1" BorderBrush="Black" />
             </Grid>
         </ScrollViewer>
-        <Grid Grid.Column="1">
+        <Grid x:Name="GameDatas" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Label Content="{Binding ClickCount}"/>
+            <Label Content="{Binding Path=Datas.ClickCount}"/>
             <ItemsControl x:Name="lst2" ItemTemplate="{DynamicResource DataTemplate_colors}" Grid.Column="1" />
         </Grid>
     </Grid>
