@@ -51,19 +51,7 @@ namespace ColorCross.Logic
         public LineOfColors[] Columns { get => columns; }
         public List<Color> Colors { get => colors; }
 
-        public ColorCrossLogic()
-        {
-
-            //pixels = new Color[0, 0];
-            pixels = new int[0, 0];
-            status = new List<List<CellData>>();
-            colors = new List<Color>();
-            rows = new LineOfColors[0];
-            columns = new LineOfColors[0];
-            numberOfColoredLinesAndColumns = 0;
-            currentCorrectLines = 0;
-            bmp = new Bitmap(1, 1);
-        }
+     
 		public ColorCrossLogic()
 		{
 			pixels = Array.Empty<Color[]>();
