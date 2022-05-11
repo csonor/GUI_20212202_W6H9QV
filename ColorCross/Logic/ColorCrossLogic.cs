@@ -3,14 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Input;
-using System.Windows.Media;
-using static ColorCross.Logic.LineOfColors;
 using Color = System.Windows.Media.Color;
 
 namespace ColorCross.Logic
