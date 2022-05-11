@@ -29,6 +29,23 @@ namespace ColorCross.UserControls
 		public LevelSelectUserControl()
 		{
 			InitializeComponent();
+		}
+
+		private void OpenGame(string path)
+		{
+			GameWindow gw = new GameWindow(path);
+			gw.ShowDialog();
+			if (gw.DialogResult == true)
+				completedLevels.Add(path);
+
+			var json = JsonSerializer.Serialize(completedLevels);
+			File.WriteAllText("levels.json", json);
+			wrp.Children.Clear();
+			UserControl_Loaded(this, new RoutedEventArgs());
+		}
+
+		private void UserControl_Loaded(object sender, RoutedEventArgs e)
+		{
 			var path = Directory.GetFiles(Path.Combine("Images"), "*bmp");
 			if (File.Exists("levels.json"))
 				completedLevels = JsonSerializer.Deserialize<List<string>>(File.ReadAllText("levels.json"));
@@ -57,17 +74,6 @@ namespace ColorCross.UserControls
 					});
 				}
 			}
-		}
-
-		private void OpenGame(string path)
-		{
-			GameWindow gw = new GameWindow(path);
-			gw.ShowDialog();
-			if (gw.DialogResult == true)
-				completedLevels.Add(path);
-
-			var json = JsonSerializer.Serialize(completedLevels);
-			File.WriteAllText("levels.json", json);
 		}
 	}
 }

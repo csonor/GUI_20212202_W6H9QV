@@ -10,7 +10,8 @@
 		Closed="Window_Closed"
 		SizeChanged="Window_SizeChanged"
 		Title="GameWindow" Height="600" Width="800"
-		Closing="Window_Closing">
+		Closing="Window_Closing"
+		Background="Blue">
 	<Window.Resources>
 		<ui:IntToColorConverter x:Key="IntToColorConverter" />
 		<DataTemplate x:Key="DataTemplate_colors" >
