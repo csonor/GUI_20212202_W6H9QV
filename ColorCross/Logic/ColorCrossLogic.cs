@@ -15,7 +15,7 @@ namespace ColorCross.Logic
 		List<Color> colors;
 		LineOfColors[] rows;
 		LineOfColors[] columns;
-		int numberOfColoredLinesAndColumns;
+		int numberOfColoredLinesAndColumns; 
 		int currentCorrectLines;
 		Bitmap bmp;
 		string fileName;
