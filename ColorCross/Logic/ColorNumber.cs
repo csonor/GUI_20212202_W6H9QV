@@ -16,7 +16,7 @@ namespace ColorCross.Logic
 		public struct ColorNumber : IEquatable<ColorNumber>
 		{
 			public int Count;
-			public Color Color;
+			public int Color;
 
 			public bool Equals(ColorNumber other)
 			{

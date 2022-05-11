@@ -35,7 +35,7 @@ namespace ColorCross.ViewModel
         public GameWindowViewModel(IColorCrossLogic logic)
         {
             this.logic = logic;
-            this.Statuses = logic.GetCurrentStatuses();
+            this.Statuses = logic.Status;
             this.selectedColor = 2;
 
         }
