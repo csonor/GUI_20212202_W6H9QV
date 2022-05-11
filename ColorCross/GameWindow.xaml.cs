@@ -66,7 +66,7 @@ namespace ColorCross
 
 		private void Window_Closed(object sender, EventArgs e)
 		{
-			logic.GameEnd(false);
+			logic.GameEnd();
 		}
 	}
 

@@ -17,7 +17,6 @@ namespace ColorCross.Logic
 {
 	class ColorCrossLogic : IColorCrossLogic
 	{
-		//Color[][] pixels;
 		int[,] pixels;
 		List<List<CellData>> status;
 		List<Color> colors;
@@ -36,7 +35,6 @@ namespace ColorCross.Logic
 
 		public ColorCrossLogic()
 		{
-			//pixels = Array.Empty<Color[]>();
 			pixels = new int[0, 0];
 			status = new List<List<CellData>>();
 			colors = new List<Color>();
@@ -57,7 +55,7 @@ namespace ColorCross.Logic
 			fileName = new string(filePath.Split('\\')[1].TakeWhile(x => x != '.').ToArray());
 			if (File.Exists(fileName + ".json"))
 				LoadPixelsFromFile();
-			
+			else CreateCellDataList();
 
 			CountUniqueColors();
 			CountRowColors();
@@ -72,24 +70,33 @@ namespace ColorCross.Logic
 			status = data.Status;
 		}
 
+		void CreateCellDataList()
+		{
+			for (int i = 0; i < bmp.Height; i++)
+			{
+				List<CellData> rd = new List<CellData>();
+				for (int j = 0; j < bmp.Width; j++)
+				{
+					CellData cd = new CellData() { X = i, Y = j, Color = -1 }; //temp
+					rd.Add(cd);
+				}
+				status.Add(rd);
+			}
+		}
+
 		void CountUniqueColors()
 		{
 			pixels = new int[bmp.Height, bmp.Width];
 			for (int i = 0; i < bmp.Height; i++)
 			{
-				List<CellData> rd = new List<CellData>();
 				for (int j = 0; j < bmp.Width; j++)
 				{
 					var color = bmp.GetPixel(j, i);
 					var newColor = Color.FromArgb(color.A, color.R, color.G, color.B);
 					if (!colors.Contains(newColor) && color.Name != "0")
 						colors.Add(newColor);
-
 					pixels[i, j] = colors.IndexOf(newColor);
-					CellData cd = new CellData() { X = i, Y = j, Color = -1 }; //temp
-					rd.Add(cd);
 				}
-				status.Add(rd);
 			}
 		}
 
@@ -151,20 +158,12 @@ namespace ColorCross.Logic
 		{
 			status[x][y].Color = color;
 			ClickCount++;
-
 		}
 
-		public void GameEnd(bool isCompleted)
+		public void GameEnd()
 		{
-			if (isCompleted)
-			{
-				//TODO map done
-			}
-			else
-			{
-				var json = JsonSerializer.Serialize(new AllData(ClickCount, status), typeof(AllData));
-				File.WriteAllText($"{fileName}.json", json);
-			}
+			var json = JsonSerializer.Serialize(new AllData(ClickCount, status), typeof(AllData));
+			File.WriteAllText($"{fileName}.json", json);
 		}
 
 		public void ResetGame()

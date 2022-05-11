@@ -7,7 +7,8 @@
 		xmlns:vm="clr-namespace:ColorCross.ViewModel"
         xmlns:ui="clr-namespace:ColorCross.UI"
         mc:Ignorable="d"
-        Title="GameWindow" Height="1080" Width="1920">
+        Title="GameWindow" Height="1080" Width="1920"
+		Closed="Window_Closed">
     <Window.Resources>
         <ui:IntToColorConverter x:Key="IntToColorConverter" />
         <DataTemplate x:Key="DataTemplate_colors" >
