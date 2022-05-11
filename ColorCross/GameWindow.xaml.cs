@@ -25,9 +25,11 @@ namespace ColorCross
     public partial class GameWindow : Window
     {
         GameWindowViewModel VM;
+
+        IColorCrossLogic logic = new ColorCrossLogic();
         public GameWindow(string Path)
         {
-            IColorCrossLogic logic = new ColorCrossLogic();
+         
             logic.ImageReader(Path);
             VM = new GameWindowViewModel(logic);
             InitializeComponent();
@@ -41,7 +43,9 @@ namespace ColorCross
             }
             this.DataContext = this.VM;
             lst.ItemsSource = this.VM.Statuses;
+
             lst2.ItemsSource = colors;
+
 
 
         }
@@ -51,6 +55,7 @@ namespace ColorCross
             Button b = (Button)sender;
             CellData o = (CellData)b.DataContext;
             VM.Click(o.X, o.Y);
+     
         }
 
         private void ColorButton_Click(object sender, RoutedEventArgs e)
@@ -58,6 +63,7 @@ namespace ColorCross
             Button b = (Button)sender;
             CellData o = (CellData)b.DataContext;
             VM.SelectedColor=o.Color;
+           
         }
     }
 
