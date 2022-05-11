@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ColorCross.Logic;
+using ColorCross.UI;
+using ColorCross.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +22,42 @@ namespace ColorCross
     /// </summary>
     public partial class GameWindow : Window
     {
+        GameWindowViewModel VM;
         public GameWindow(string Path)
         {
+            IColorCrossLogic logic = new ColorCrossLogic();
+            logic.ImageReader(Path);
+            VM = new GameWindowViewModel(logic);
             InitializeComponent();
+            IntToColorConverter converter = FindResource("IntToColorConverter") as IntToColorConverter;
+            converter.Colors = logic.Colors;
+            List<CellData> colors = new List<CellData>();
+            colors.Add(new CellData() { X = -1, Y = 0, Color = -1 });
+            for(int i=0; i < logic.Colors.Count; i++)
+            {
+                colors.Add(new CellData() { X = i, Y = 0, Color = i });
+            }
+            this.DataContext = this.VM;
+            lst.ItemsSource = this.VM.Statuses;
+            lst2.ItemsSource = colors;
+
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            CellData o = (CellData)b.DataContext;
+            VM.Click(o.X, o.Y);
+        }
+
+        private void ColorButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            CellData o = (CellData)b.DataContext;
+            VM.SelectedColor=o.Color;
         }
     }
+
+
 }
