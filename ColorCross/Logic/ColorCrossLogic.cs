@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using static ColorCross.Logic.LineOfColors;
 using Color = System.Windows.Media.Color;
 
 namespace ColorCross.Logic
@@ -36,33 +37,24 @@ namespace ColorCross.Logic
         int numberOfColoredLinesAndColumns;
         int currentCorrectLines;
         Bitmap bmp;
-	class ColorCrossLogic
-	{
-		Color[][] pixels;
-		List<Color> colors;
-		LineOfColors[] rows;
-		LineOfColors[] columns;
-		int numberOfColoredLinesAndColumns;
-		int currentCorrectLines;
-		Bitmap bmp;
-		string fileName;
 
         public LineOfColors[] Rows { get => rows; }
         public LineOfColors[] Columns { get => columns; }
         public List<Color> Colors { get => colors; }
 
-     
-		public ColorCrossLogic()
-		{
-			pixels = Array.Empty<Color[]>();
-			colors = new List<Color>();
-			rows = Array.Empty<LineOfColors>();
-			columns = Array.Empty<LineOfColors>();
-			numberOfColoredLinesAndColumns = 0;
-			currentCorrectLines = 0;
-			bmp = new Bitmap(1, 1);
-			fileName = string.Empty;
-		}
+        public ColorCrossLogic()
+        {
+
+            //pixels = new Color[0, 0];
+            pixels = new int[0, 0];
+            status = new List<List<CellData>>();
+            colors = new List<Color>();
+            rows = new LineOfColors[0];
+            columns = new LineOfColors[0];
+            numberOfColoredLinesAndColumns = 0;
+            currentCorrectLines = 0;
+            bmp = new Bitmap(1, 1);
+        }
 
         public void ImageReader(string fileName)
         {
@@ -70,12 +62,7 @@ namespace ColorCross.Logic
             rows = new LineOfColors[bmp.Height];
             columns = new LineOfColors[bmp.Width];
             pixels = new int[bmp.Height, bmp.Width];
-            
-		public void ImageReader(string filePath)
-		{
-			bmp = new Bitmap(filePath);
-			rows = new LineOfColors[bmp.Height];
-			columns = new LineOfColors[bmp.Width];
+
 
             for (int i = 0; i < bmp.Height; i++)
             {
@@ -89,7 +76,7 @@ namespace ColorCross.Logic
                         colors.Add(newColor);
                     }
                     pixels[i, j] = colors.IndexOf(newColor);
-                    CellData cd = new CellData() { X = i, Y = j, Color = pixels[i,j] };
+                    CellData cd = new CellData() { X = i, Y = j, Color = pixels[i, j] };
                     rd.Add(cd);
                 }
                 status.Add(rd);
@@ -97,44 +84,6 @@ namespace ColorCross.Logic
             CountRowColors();
             CountColumnColors();
         }
-			fileName = new string(filePath.Split('\\')[1].TakeWhile(x => x != '.').ToArray());
-			if (File.Exists(fileName + ".json"))
-				LoadPixelsFromFile();
-			else CreatePixelArray();
-
-			CountUniqueColors();
-			CountRowColors();
-			CountColumnColors();
-		}
-
-		void LoadPixelsFromFile()
-		{
-			var json = File.ReadAllText(fileName + ".json");
-			pixels = JsonSerializer.Deserialize<Color[][]>(json);
-		}
-
-		void CreatePixelArray()
-		{
-			pixels = new Color[bmp.Height][];
-			for (int i = 0; i < pixels.Length; i++)
-			{
-				pixels[i] = new Color[bmp.Width];
-			}
-		}
-
-		void CountUniqueColors()
-		{
-			for (int i = 0; i < bmp.Height; i++)
-			{
-				for (int j = 0; j < bmp.Width; j++)
-				{
-					var color = bmp.GetPixel(j, i);
-					var newColor = Color.FromArgb(color.A, color.R, color.G, color.B);
-					if (!colors.Contains(newColor) && color.Name != "0")
-						colors.Add(newColor);
-				}
-			}
-		}
 
         void CountRowColors()
         {
@@ -162,33 +111,6 @@ namespace ColorCross.Logic
                 rows[i].IsDone = false;
             }
         }
-		void CountRowColors()
-		{
-			for (int i = 0; i < rows.Length; i++)
-			{
-				for (int j = 0; j < bmp.Width; j++)
-				{
-					int k = j + 1;
-					int sum = 0;
-					var color = bmp.GetPixel(j, i);
-					var newColor = Color.FromArgb(color.A, color.R, color.G, color.B);
-					while (k < bmp.Width && bmp.GetPixel(k, i) == color)
-					{
-						sum++;
-						k++;
-					}
-					if (color.Name != "0")
-					{
-						if (rows[i].Colors == null)
-							rows[i].Colors = new List<LineOfColors.ColorNumber>();
-						rows[i].Colors.Add(new LineOfColors.ColorNumber { Color = newColor, Count = sum + 1 });
-					}
-					j = k - 1;
-				}
-				rows[i].IsDone = false;
-				numberOfColoredLinesAndColumns++;
-			}
-		}
 
         void CountColumnColors()
         {
@@ -226,135 +148,4 @@ namespace ColorCross.Logic
             status[x][y].Color = color;
         }
     }
-		void CountColumnColors()
-		{
-			for (int i = 0; i < columns.Length; i++)
-			{
-				for (int j = 0; j < bmp.Height; j++)
-				{
-					int k = j + 1;
-					int sum = 0;
-					var color = bmp.GetPixel(i, j);
-					var newColor = Color.FromArgb(color.A, color.R, color.G, color.B);
-					while (k < bmp.Height && bmp.GetPixel(i, k) == color)
-					{
-						sum++;
-						k++;
-					}
-					if (color.Name != "0")
-					{
-						if (columns[i].Colors == null)
-							columns[i].Colors = new List<LineOfColors.ColorNumber>();
-						columns[i].Colors.Add(new LineOfColors.ColorNumber { Color = newColor, Count = sum + 1 });
-					}
-					j = k - 1;
-				}
-				columns[i].IsDone = false;
-				numberOfColoredLinesAndColumns++;
-			}
-		}
-
-		public bool ColorCheck(int i, int j)
-		{
-			if (RowCheck(i))
-			{
-				if (!Rows[i].IsDone)
-				{
-					currentCorrectLines++;
-					Rows[i].IsDone = true;
-				}
-			}
-			else if (Rows[i].IsDone)
-			{
-				currentCorrectLines--;
-				Rows[i].IsDone = false;
-			}
-
-			if (ColumnCheck(j))
-			{
-				if (!Columns[j].IsDone)
-				{
-					currentCorrectLines++;
-					Columns[j].IsDone = true;
-				}
-			}
-			else if (Columns[j].IsDone)
-			{
-				currentCorrectLines--;
-				Columns[j].IsDone = false;
-			}
-
-			return numberOfColoredLinesAndColumns == currentCorrectLines;
-		}
-
-		bool RowCheck(int i)
-		{
-			var rowColors = new List<LineOfColors.ColorNumber>();
-			for (int j = 0; j < pixels[i].Length; j++)
-			{
-				int k = j + 1;
-				int sum = 0;
-				var color = pixels[i][j];
-				while (k < pixels[i].Length && pixels[i][k] == color)
-				{
-					sum++;
-					k++;
-				}
-				if (color.ToString() != "#00000000")
-				{
-					rowColors.Add(new LineOfColors.ColorNumber { Color = color, Count = sum + 1 });
-				}
-				j = k - 1;
-			}
-			return rowColors.SequenceEqual(Rows[i].Colors);
-		}
-
-		bool ColumnCheck(int j)
-		{
-			var columnColors = new List<LineOfColors.ColorNumber>();
-			for (int i = 0; i < pixels.Length; i++)
-			{
-				int k = i + 1;
-				int sum = 0;
-				var color = pixels[i][j];
-				while (k < pixels.Length && pixels[k][j] == color)
-				{
-					sum++;
-					k++;
-				}
-				if (color.ToString() != "#00000000")
-				{
-					columnColors.Add(new LineOfColors.ColorNumber { Color = color, Count = sum + 1 });
-				}
-				i = k - 1;
-			}
-			return columnColors.SequenceEqual(Columns[j].Colors);
-		}
-
-		public void ChangePixelColor(System.Windows.Media.Brush brush, int i, int j)
-		{
-			pixels[i][j] = ((SolidColorBrush)brush).Color;
-		}
-
-		public void GameEnd(bool isCompleted)
-		{
-			if (isCompleted)
-			{
-				//TODO map done
-			}
-			else
-			{
-				var json = JsonSerializer.Serialize(pixels, typeof(Color[][]));
-				File.WriteAllText($"{fileName}.json", json);
-			}
-		}
-
-		public void ResetGame()
-		{
-			var path = fileName + ".json";
-			if (File.Exists(path))
-				File.Delete(path);
-			CreatePixelArray();
-		}
-	}
 }
