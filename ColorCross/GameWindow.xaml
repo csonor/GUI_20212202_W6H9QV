@@ -14,11 +14,40 @@
         <DataTemplate x:Key="DataTemplate_colors">
             <Button Content="{Binding Path=Color}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}" Click="ColorButton_Click"  Height="20" Width="20" Margin="1,1,1,1"/>
         </DataTemplate>
-        <DataTemplate x:Key="DataTemplate_Level2">
-			<Button Content="{Binding Path=Color}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}" Click="Button_Click"  Height="20" Width="20" Margin="1,1,1,1"/>
-		</DataTemplate>
 
-		<DataTemplate x:Key="DataTemplate_Level1">
+        <DataTemplate x:Key="DataTemplate_cols">
+            <Button Content="{Binding Path=Count}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}"  Height="15" Width="15" Margin="1,1,1,1"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="DataTemplate_rows">
+            <Button Content="{Binding Path=Count}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}"   Height="15" Width="15" Margin="1,1,1,1"/>
+        </DataTemplate>
+        
+
+        <DataTemplate x:Key="DataTemplate_cols_l1">
+            <ItemsControl ItemsSource="{Binding Path=Colors}" ItemTemplate="{DynamicResource DataTemplate_cols}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </DataTemplate>
+        <DataTemplate x:Key="DataTemplate_rows_l1">
+            <ItemsControl ItemsSource="{Binding Path=Colors}" ItemTemplate="{DynamicResource DataTemplate_rows}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </DataTemplate>
+
+        <DataTemplate x:Key="DataTemplate_Level2">
+            <Button Content="{Binding Path=Color}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}" Click="Button_Click"  Height="15" Width="15" Margin="1,1,1,1"/>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="DataTemplate_Level1">
 			<ItemsControl ItemsSource="{Binding}" ItemTemplate="{DynamicResource DataTemplate_Level2}">
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
@@ -34,7 +63,19 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-		<ItemsControl x:Name="lst" ItemTemplate="{DynamicResource DataTemplate_Level1}" Grid.Column="0"/>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <ItemsControl x:Name="lstrows" ItemTemplate="{DynamicResource DataTemplate_rows_l1}" Grid.Column="0" Grid.Row="1"/>
+            <ItemsControl x:Name="lstcols" ItemTemplate="{DynamicResource DataTemplate_cols_l1}" Grid.Column="1" Grid.Row="0"/>
+            <ItemsControl x:Name="lst" ItemTemplate="{DynamicResource DataTemplate_Level1}" Grid.Column="1" Grid.Row="1"/>
+        </Grid>
         <ItemsControl x:Name="lst2" ItemTemplate="{DynamicResource DataTemplate_colors}" Grid.Column="1"/>
     </Grid>
 </Window>

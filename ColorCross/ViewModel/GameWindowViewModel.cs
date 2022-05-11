@@ -16,6 +16,10 @@ namespace ColorCross.ViewModel
 
         //List<List<ColorData>> statuses;
 
+        public List<LineOfColors> Rows { get; private set; }
+        public List<LineOfColors> Columns { get; private set; }
+        public int ClickCount { get; private set; }
+
         public List<List<CellData>> Statuses
         {
             get; private set;
@@ -37,6 +41,9 @@ namespace ColorCross.ViewModel
             this.logic = logic;
             this.Statuses = logic.Status;
             this.selectedColor = 2;
+            this.Rows = new List<LineOfColors>(logic.Rows);
+            this.Columns = new List<LineOfColors>(logic.Columns);
+
 
         }
 

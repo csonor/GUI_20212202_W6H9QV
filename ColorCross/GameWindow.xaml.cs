@@ -42,6 +42,8 @@ namespace ColorCross
 			this.DataContext = this.VM;
 			lst.ItemsSource = this.VM.Statuses;
 			lst2.ItemsSource = colors;
+			lstcols.ItemsSource = this.VM.Columns;
+			lstrows.ItemsSource = this.VM.Rows;
 
 
 		}
