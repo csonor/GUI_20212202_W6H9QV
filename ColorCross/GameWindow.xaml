@@ -22,11 +22,11 @@
 		</DataTemplate>
 
 		<DataTemplate x:Key="DataTemplate_cols">
-            <Button Content="{Binding Path=Count}" Foreground="{Binding Path=Color, Converter={StaticResource IntToColorTextConverter}}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}"  Height="15" Width="15" Margin="1,1,1,1" IsHitTestVisible="False"/>
+            <Button Content="{Binding Path=Count}" Foreground="{Binding Path=Color, Converter={StaticResource IntToColorTextConverter}}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}"  Height="20" Width="20" Margin="1,1,1,1" IsHitTestVisible="False" FontSize="12"/>
 		</DataTemplate>
 
 		<DataTemplate x:Key="DataTemplate_rows">
-            <Button Content="{Binding Path=Count}" Foreground="{Binding Path=Color, Converter={StaticResource IntToColorTextConverter}}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}"   Height="15" Width="15" Margin="1,1,1,1" IsHitTestVisible="False"/>
+            <Button Content="{Binding Path=Count}" Foreground="{Binding Path=Color, Converter={StaticResource IntToColorTextConverter}}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}"   Height="20" Width="20" Margin="1,1,1,1" IsHitTestVisible="False" FontSize="12"/>
 		</DataTemplate>
 
 
@@ -50,7 +50,7 @@
 		</DataTemplate>
 
 		<DataTemplate x:Key="DataTemplate_Level2">
-			<Button  Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}" Click="Button_Click"  Height="15" Width="15" Margin="1,1,1,1"/>
+			<Button  Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}" Click="Button_Click"  Height="20" Width="20" Margin="1,1,1,1"/>
 		</DataTemplate>
 
 		<DataTemplate x:Key="DataTemplate_Level1">
