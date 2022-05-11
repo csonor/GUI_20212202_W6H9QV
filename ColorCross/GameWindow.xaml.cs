@@ -25,6 +25,8 @@ namespace ColorCross
 			InitializeComponent();
 			IntToColorConverter converter = (IntToColorConverter)FindResource("IntToColorConverter");
 			converter.Colors = logic.Colors;
+			IntToColorTextConverter converter2 = (IntToColorTextConverter)FindResource("IntToColorTextConverter");
+			converter2.Colors = logic.Colors;
 			List<CellData> colors = new List<CellData>();
 			colors.Add(new CellData() { X = -1, Y = 0, Color = -1 });
 			for (int i = 0; i < logic.Colors.Count; i++)

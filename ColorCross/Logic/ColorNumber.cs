@@ -4,9 +4,10 @@ using System.Collections.Generic;
 
 namespace ColorCross.Logic
 {
-	struct LineOfColors
+	class LineOfColors:ObservableObject
 	{
-		public bool IsDone { get; set; }
+		bool isDone;
+		public bool IsDone { get { return this.isDone; } set { SetProperty(ref isDone, value); } }
 		public List<ColorNumber> Colors { get; set; }
 
 		public struct ColorNumber : IEquatable<ColorNumber>

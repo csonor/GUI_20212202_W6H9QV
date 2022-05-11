@@ -37,7 +37,8 @@ namespace ColorCross.ViewModel
 			this.selectedColor = 0;
 			this.Rows = new List<LineOfColors>(logic.Rows);
 			this.Columns = new List<LineOfColors>(logic.Columns);
-			this.ButtonSize = 10;
+			this.ButtonSize = 15;
+			this.ClickCount=logic.ClickCount;
 		}
 
 		public GameWindowViewModel()
