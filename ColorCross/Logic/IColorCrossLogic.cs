@@ -13,8 +13,8 @@ namespace ColorCross.Logic
 
 		void Click(int x, int y, int color);
 		//bool ColorCheck(int i, int j);
-		void GameEnd(bool isCompleted, TimeSpan ts);
-		void ImageReader(string filePath, out TimeSpan ts);
+		void GameEnd(bool isCompleted);
+		void ImageReader(string filePath);
 		void ResetGame();
 	}
 }

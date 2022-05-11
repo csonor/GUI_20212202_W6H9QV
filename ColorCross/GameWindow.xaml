@@ -7,12 +7,11 @@
 		xmlns:vm="clr-namespace:ColorCross.ViewModel"
         xmlns:ui="clr-namespace:ColorCross.UI"
         mc:Ignorable="d"
-        Title="GameWindow" Height="450" Width="800"
-		Closed="Window_Closed">
-	<Window.Resources>
+        Title="GameWindow" Height="1080" Width="1920">
+    <Window.Resources>
         <ui:IntToColorConverter x:Key="IntToColorConverter" />
-        <DataTemplate x:Key="DataTemplate_colors">
-            <Button Content="{Binding Path=Color}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}" Click="ColorButton_Click"  Height="20" Width="20" Margin="1,1,1,1"/>
+        <DataTemplate x:Key="DataTemplate_colors" >
+            <Button Content="{Binding Path=Color}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}" Width="40" Height="40" Click="ColorButton_Click" BorderThickness="2" />
         </DataTemplate>
 
         <DataTemplate x:Key="DataTemplate_cols">
@@ -57,10 +56,16 @@
 			</ItemsControl>
 		</DataTemplate>
 
-	</Window.Resources>
+    </Window.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
