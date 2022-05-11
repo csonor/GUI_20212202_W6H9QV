@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -41,7 +42,7 @@ namespace ColorCross.Logic
 			fileName = string.Empty;
 		}
 
-		public void ImageReader(string filePath)
+		public void ImageReader(string filePath, out TimeSpan ts)
 		{
 			bmp = new Bitmap(filePath);
 			rows = new LineOfColors[bmp.Height];
@@ -49,18 +50,24 @@ namespace ColorCross.Logic
 
 			fileName = new string(filePath.Split('\\')[1].TakeWhile(x => x != '.').ToArray());
 			if (File.Exists(fileName + ".json"))
-				LoadPixelsFromFile();
-			else CreatePixelArray();
+				LoadPixelsFromFile(out ts);
+			else
+			{
+				ts = new TimeSpan();
+				CreatePixelArray();
+			}
 
 			CountUniqueColors();
 			CountRowColors();
 			CountColumnColors();
 		}
 
-		void LoadPixelsFromFile()
+		void LoadPixelsFromFile(out TimeSpan ts)
 		{
 			var json = File.ReadAllText(fileName + ".json");
-			pixels = JsonSerializer.Deserialize<Color[][]>(json);
+			var data = JsonSerializer.Deserialize<AllData>(json);
+			ts = new TimeSpan(data.Ticks);
+			pixels = data.Pixels;
 		}
 
 		void CreatePixelArray()
@@ -224,7 +231,7 @@ namespace ColorCross.Logic
 			pixels[i][j] = ((SolidColorBrush)brush).Color;
 		}
 
-		public void GameEnd(bool isCompleted)
+		public void GameEnd(bool isCompleted, TimeSpan ts)
 		{
 			if (isCompleted)
 			{
@@ -232,7 +239,7 @@ namespace ColorCross.Logic
 			}
 			else
 			{
-				var json = JsonSerializer.Serialize(pixels, typeof(Color[][]));
+				var json = JsonSerializer.Serialize(new AllData(ts.Ticks, pixels), typeof(AllData));
 				File.WriteAllText($"{fileName}.json", json);
 			}
 		}
@@ -243,6 +250,18 @@ namespace ColorCross.Logic
 			if (File.Exists(path))
 				File.Delete(path);
 			CreatePixelArray();
+		}
+
+		class AllData
+		{
+			public AllData(long ticks, Color[][] pixels)
+			{
+				Ticks = ticks;
+				Pixels = pixels;
+			}
+
+			public long Ticks { get; }
+			public Color[][] Pixels { get; }
 		}
 	}
 }
