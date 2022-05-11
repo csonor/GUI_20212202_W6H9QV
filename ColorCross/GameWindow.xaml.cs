@@ -24,6 +24,19 @@ namespace ColorCross
 	/// </summary>
 	public partial class GameWindow : Window
 	{
+
+		public static IEnumerable<T> FindVisualChilds<T>(DependencyObject depObj) where T : DependencyObject
+		{
+			if (depObj == null) yield return (T)Enumerable.Empty<T>();
+			for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+			{
+				DependencyObject ithChild = VisualTreeHelper.GetChild(depObj, i);
+				if (ithChild == null) continue;
+				if (ithChild is T t) yield return t;
+				foreach (T childOfChild in FindVisualChilds<T>(ithChild)) yield return childOfChild;
+			}
+		}
+
 		IColorCrossLogic logic = new ColorCrossLogic();
 		GameWindowViewModel VM;
 		TimeSpan ts;
@@ -33,6 +46,8 @@ namespace ColorCross
 			logic.ImageReader(path);
 			VM = new GameWindowViewModel(logic);
 			InitializeComponent();
+
+			
 			IntToColorConverter converter = (IntToColorConverter)FindResource("IntToColorConverter");
 			converter.Colors = logic.Colors;
 			List<CellData> colors = new List<CellData>();
@@ -46,6 +61,8 @@ namespace ColorCross
 			lst2.ItemsSource = colors;
 			lstcols.ItemsSource = this.VM.Columns;
 			lstrows.ItemsSource = this.VM.Rows;
+
+
 
 
 		}
@@ -66,9 +83,15 @@ namespace ColorCross
 
 		private void Window_Closed(object sender, EventArgs e)
 		{
-			logic.GameEnd(false);
+			logic.GameEnd();
 		}
-	}
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
+
+        }
+    }
 
 
 }

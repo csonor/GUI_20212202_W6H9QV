@@ -7,19 +7,21 @@
 		xmlns:vm="clr-namespace:ColorCross.ViewModel"
         xmlns:ui="clr-namespace:ColorCross.UI"
         mc:Ignorable="d"
+        Closed="Window_Closed"
+        SizeChanged="Window_SizeChanged"
         Title="GameWindow" Height="600" Width="800">
     <Window.Resources>
         <ui:IntToColorConverter x:Key="IntToColorConverter" />
         <DataTemplate x:Key="DataTemplate_colors" >
-            <Button Content="{Binding Path=Color}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}" Width="40" Height="40" Click="ColorButton_Click" BorderThickness="2" />
+            <Button Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}" Width="40" Height="40" Click="ColorButton_Click" BorderThickness="2" />
         </DataTemplate>
 
         <DataTemplate x:Key="DataTemplate_cols">
-            <Button Content="{Binding Path=Count}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}"  Height="15" Width="15" Margin="1,1,1,1"/>
+            <Button Content="{Binding Path=Count}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}"  Height="15" Width="15" Margin="1,1,1,1" IsHitTestVisible="False"/>
         </DataTemplate>
 
         <DataTemplate x:Key="DataTemplate_rows">
-            <Button Content="{Binding Path=Count}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}"   Height="15" Width="15" Margin="1,1,1,1"/>
+            <Button Content="{Binding Path=Count}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}"   Height="15" Width="15" Margin="1,1,1,1" IsHitTestVisible="False"/>
         </DataTemplate>
         
 
@@ -27,7 +29,7 @@
             <ItemsControl ItemsSource="{Binding Path=Colors}" ItemTemplate="{DynamicResource DataTemplate_cols}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
+                        <StackPanel Orientation="Vertical"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
@@ -43,7 +45,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="DataTemplate_Level2">
-            <Button Content="{Binding Path=Color}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}" Click="Button_Click"  Height="15" Width="15" Margin="1,1,1,1"/>
+            <Button  Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}" Click="Button_Click"  Height="15" Width="15" Margin="1,1,1,1"/>
         </DataTemplate>
         
         <DataTemplate x:Key="DataTemplate_Level1">
@@ -63,18 +65,24 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="0" x:Name="contentGrid">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <ItemsControl x:Name="lstrows" ItemTemplate="{DynamicResource DataTemplate_rows_l1}" Grid.Column="0" Grid.Row="1"/>
-            <ItemsControl x:Name="lstcols" ItemTemplate="{DynamicResource DataTemplate_cols_l1}" Grid.Column="1" Grid.Row="0"/>
-            <ItemsControl x:Name="lst" ItemTemplate="{DynamicResource DataTemplate_Level1}" Grid.Column="1" Grid.Row="1"/>
+            <ItemsControl x:Name="lstrows" ItemTemplate="{DynamicResource DataTemplate_rows_l1}" Grid.Column="1" Grid.Row="0"/>
+            <ItemsControl x:Name="lstcols" ItemTemplate="{DynamicResource DataTemplate_cols_l1}" Grid.Column="0" Grid.Row="1" VerticalAlignment="Bottom">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            <ItemsControl x:Name="lst" ItemTemplate="{DynamicResource DataTemplate_Level1}" Grid.Column="0" Grid.Row="0"/>
         </Grid>
         <ItemsControl x:Name="lst2" ItemTemplate="{DynamicResource DataTemplate_colors}" Grid.Column="1" />
     </Grid>

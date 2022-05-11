@@ -12,8 +12,7 @@ namespace ColorCross.Logic
 		List<List<CellData>> Status { get; }
 
 		void Click(int x, int y, int color);
-		//bool ColorCheck(int i, int j);
-		void GameEnd(bool isCompleted);
+		void GameEnd();
 		void ImageReader(string filePath);
 		void ResetGame();
 	}
