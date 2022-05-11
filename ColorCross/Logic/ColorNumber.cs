@@ -7,15 +7,20 @@ using System.Windows.Media;
 
 namespace ColorCross.Logic
 {
-	struct ColorNumber
-	{
-		public int Count;
-		public Color Color;
-	}
-
 	struct LineOfColors
 	{
 		public bool IsDone;
 		public List<ColorNumber> Colors;
+
+		public struct ColorNumber : IEquatable<ColorNumber>
+		{
+			public int Count;
+			public Color Color;
+
+			public bool Equals(ColorNumber other)
+			{
+				return $"{Count}{Color}" == $"{other.Count}{other.Color}";
+			}
+		}
 	}
 }
