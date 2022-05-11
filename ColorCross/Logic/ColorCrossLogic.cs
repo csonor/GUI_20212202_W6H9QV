@@ -27,6 +27,7 @@ namespace ColorCross.Logic
 		int currentCorrectLines;
 		Bitmap bmp;
 		string fileName;
+		public int ClickCount { get; set; }
 
 		public LineOfColors[] Rows { get => rows; }
 		public LineOfColors[] Columns { get => columns; }
@@ -47,7 +48,7 @@ namespace ColorCross.Logic
 			fileName = string.Empty;
 		}
 
-		public void ImageReader(string filePath, out TimeSpan ts)
+		public void ImageReader(string filePath)
 		{
 			bmp = new Bitmap(filePath);
 			rows = new LineOfColors[bmp.Height];
@@ -55,19 +56,19 @@ namespace ColorCross.Logic
 
 			fileName = new string(filePath.Split('\\')[1].TakeWhile(x => x != '.').ToArray());
 			if (File.Exists(fileName + ".json"))
-				LoadPixelsFromFile(out ts);
-			else ts = new TimeSpan();
+				LoadPixelsFromFile();
+			
 
 			CountUniqueColors();
 			CountRowColors();
 			CountColumnColors();
 		}
 
-		void LoadPixelsFromFile(out TimeSpan ts)
+		void LoadPixelsFromFile()
 		{
 			var json = File.ReadAllText(fileName + ".json");
 			var data = JsonSerializer.Deserialize<AllData>(json);
-			ts = new TimeSpan(data.Ticks);
+			ClickCount = data.ClickCount;
 			status = data.Status;
 		}
 
@@ -149,9 +150,11 @@ namespace ColorCross.Logic
 		public void Click(int x, int y, int color)
 		{
 			status[x][y].Color = color;
+			ClickCount++;
+
 		}
 
-		public void GameEnd(bool isCompleted, TimeSpan ts)
+		public void GameEnd(bool isCompleted)
 		{
 			if (isCompleted)
 			{
@@ -159,7 +162,7 @@ namespace ColorCross.Logic
 			}
 			else
 			{
-				var json = JsonSerializer.Serialize(new AllData(ts.Ticks, status), typeof(AllData));
+				var json = JsonSerializer.Serialize(new AllData(ClickCount, status), typeof(AllData));
 				File.WriteAllText($"{fileName}.json", json);
 			}
 		}
@@ -174,13 +177,13 @@ namespace ColorCross.Logic
 
 		class AllData
 		{
-			public AllData(long ticks, List<List<CellData>> status)
+			public AllData(int clickCount, List<List<CellData>> status)
 			{
-				Ticks = ticks;
+				ClickCount = clickCount;
 				Status = status;
 			}
 
-			public long Ticks { get; }
+			public int ClickCount { get; }
 			public List<List<CellData>> Status { get; }
 		}
 	}

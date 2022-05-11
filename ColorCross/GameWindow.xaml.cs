@@ -30,7 +30,7 @@ namespace ColorCross
 
 		public GameWindow(string path)
 		{
-			logic.ImageReader(path, out ts);
+			logic.ImageReader(path);
 			VM = new GameWindowViewModel(logic);
 			InitializeComponent();
 			IntToColorConverter converter = (IntToColorConverter)FindResource("IntToColorConverter");
@@ -64,7 +64,7 @@ namespace ColorCross
 
 		private void Window_Closed(object sender, EventArgs e)
 		{
-			logic.GameEnd(false, ts);
+			logic.GameEnd(false);
 		}
 	}
 
