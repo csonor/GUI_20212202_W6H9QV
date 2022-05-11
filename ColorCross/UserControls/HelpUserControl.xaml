@@ -14,7 +14,7 @@
             FontFamily="Fonts/#redhat"           
             TextWrapping="Wrap"
             AcceptsReturn="True"
-            VerticalScrollBarVisibility="Disabled"  Padding="10" Foreground="White" Background="#9c7200" Text="A ColorcrossBCsZ egy logikán alapuló pixel színező.
+            VerticalScrollBarVisibility="Visible"  Padding="10" Foreground="White" Background="#9c7200" Text="A ColorcrossBCsZ egy logikán alapuló pixel színező.
 A játék célja, hogy a pixeleket kiszínezve megkapjuk a pályán elrejtett képet. 
 A pixelek helyes színezését a rajzterület mellett lévő táblázat adatai teszik lehetővé. Ebben 
 megtalálható, hogy melyik sorban, illetve oszlopban összefüggően hány darab egyszínű pixel 
@@ -27,6 +27,6 @@ hogy milyen színnel szeretnénk színezni. A pixelek akárhányszor újraszíne
 már helyesen kiszínezett pixelt is el tudjuk rontani egy rossz döntés esetén. A pálya akkor 
 van kész, ha minden pixel helyesen van kiszínezve. 
 A következő képen egy feladatot láthatunk, mellette pedig a megoldását. Itt is látszik, hogy a 
-különböző színek nem feltétlenül egymás mellett kezdődnek."/>
+különböző színek nem feltétlenül egymás mellett kezdődnek.                     "/>
     </Grid>
 </UserControl>

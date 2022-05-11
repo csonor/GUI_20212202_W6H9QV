@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800"
                  Background="#9c7200">
     <Grid>
-        <WrapPanel x:Name="wrp">
+        <WrapPanel x:Name="wrp" ScrollViewer.HorizontalScrollBarVisibility="Visible">
             
         </WrapPanel>
 

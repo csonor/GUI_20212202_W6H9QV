@@ -35,7 +35,8 @@
                     <ColumnDefinition/>
 
                 </Grid.ColumnDefinitions>
-                <Button Content="Játék"
+                <Button 
+                         Content="Játék"
                        Grid.Column="0"
                         Background="Transparent"
                        BorderThickness="0"
