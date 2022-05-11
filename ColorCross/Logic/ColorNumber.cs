@@ -10,13 +10,13 @@ namespace ColorCross.Logic
 {
 	struct LineOfColors
 	{
-		public bool IsDone;
-		public List<ColorNumber> Colors;
+		public bool IsDone { get; set; }
+		public List<ColorNumber> Colors { get; set; }
 
 		public struct ColorNumber : IEquatable<ColorNumber>
 		{
-			public int Count;
-			public int Color;
+			public int Count { get; set; }
+			public int Color { get; set; }
 
 			public bool Equals(ColorNumber other)
 			{
