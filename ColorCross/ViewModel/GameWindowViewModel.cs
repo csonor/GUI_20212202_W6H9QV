@@ -28,12 +28,12 @@ namespace ColorCross.ViewModel
 			this.logic = logic;
 			this.Datas = logic.Datas;
 			this.ButtonSize = 15;
-			this.selectedColor = 0;
+			this.selectedColor = -1;
 		}
 
 		public GameWindowViewModel()
 		{
-			this.selectedColor = 0;
+			this.selectedColor = -1;
 			this.Datas = new ColorCrossData();
 		}
 	}
