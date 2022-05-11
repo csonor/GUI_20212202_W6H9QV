@@ -10,46 +10,46 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace ColorCross.ViewModel
 {
-    class GameWindowViewModel : ObservableRecipient
-    {
-        IColorCrossLogic logic;
+	class GameWindowViewModel : ObservableRecipient
+	{
+		IColorCrossLogic logic;
 
-        //List<List<ColorData>> statuses;
+		//List<List<ColorData>> statuses;
 
-        public List<LineOfColors> Rows { get; private set; }
-        public List<LineOfColors> Columns { get; private set; }
-        public int ClickCount { get; private set; }
+		public List<LineOfColors> Rows { get; private set; }
+		public List<LineOfColors> Columns { get; private set; }
+		public int ClickCount { get; private set; }
 
-        public List<List<CellData>> Statuses
-        {
-            get; private set;
-        }
-        
-        int selectedColor;
-        public int SelectedColor
-        {
-            get { return selectedColor; }
-            set { SetProperty(ref selectedColor, value); }
-        }
+		public List<List<CellData>> Statuses
+		{
+			get; private set;
+		}
 
-        public void Click(int x, int y)
-        {
-            this.logic.Click(x, y, selectedColor);
-        }
-        public GameWindowViewModel(IColorCrossLogic logic)
-        {
-            this.logic = logic;
-            this.Statuses = logic.Status;
-            this.selectedColor = 2;
-            this.Rows = new List<LineOfColors>(logic.Rows);
-            this.Columns = new List<LineOfColors>(logic.Columns);
+		int selectedColor;
+		public int SelectedColor
+		{
+			get { return selectedColor; }
+			set { SetProperty(ref selectedColor, value); }
+		}
+
+		public void Click(int x, int y)
+		{
+			this.logic.Click(x, y, selectedColor);
+		}
+		public GameWindowViewModel(IColorCrossLogic logic)
+		{
+			this.logic = logic;
+			this.Statuses = logic.Status;
+			this.selectedColor = 0;
+			this.Rows = new List<LineOfColors>(logic.Rows);
+			this.Columns = new List<LineOfColors>(logic.Columns);
 
 
-        }
+		}
 
-        public GameWindowViewModel()
-        {
-            this.selectedColor = 2;
-        }
-    }
+		public GameWindowViewModel()
+		{
+			this.selectedColor = 0;
+		}
+	}
 }
