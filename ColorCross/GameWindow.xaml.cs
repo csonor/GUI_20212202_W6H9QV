@@ -3,19 +3,10 @@ using ColorCross.UI;
 using ColorCross.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace ColorCross
 {
@@ -26,7 +17,6 @@ namespace ColorCross
 	{
 		IColorCrossLogic logic = new ColorCrossLogic();
 		GameWindowViewModel VM;
-		TimeSpan ts;
 
 		public GameWindow(string path)
 		{
@@ -44,15 +34,31 @@ namespace ColorCross
 			this.DataContext = this.VM;
 			lst.ItemsSource = this.VM.Statuses;
 			lst2.ItemsSource = colors;
+			lstcols.ItemsSource = this.VM.Columns;
+			lstrows.ItemsSource = this.VM.Rows;
+		}
 
-
+		public static IEnumerable<T> FindVisualChilds<T>(DependencyObject depObj) where T : DependencyObject
+		{
+			if (depObj == null) yield return (T)Enumerable.Empty<T>();
+			for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+			{
+				DependencyObject ithChild = VisualTreeHelper.GetChild(depObj, i);
+				if (ithChild == null) continue;
+				if (ithChild is T t) yield return t;
+				foreach (T childOfChild in FindVisualChilds<T>(ithChild)) yield return childOfChild;
+			}
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
 			Button b = (Button)sender;
 			CellData o = (CellData)b.DataContext;
-			VM.Click(o.X, o.Y);
+			if (VM.Click(o.X, o.Y))
+			{
+				MessageBox.Show("Kiraktad a képet!", "Kész a pálya", MessageBoxButton.OK, MessageBoxImage.Information);
+				Close();
+			}
 		}
 
 		private void ColorButton_Click(object sender, RoutedEventArgs e)
@@ -64,9 +70,16 @@ namespace ColorCross
 
 		private void Window_Closed(object sender, EventArgs e)
 		{
-			logic.GameEnd(false);
+			logic.GameEnd();
+		}
+
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			DialogResult = logic.Check();
+		}
+
+		private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+		{
 		}
 	}
-
-
 }

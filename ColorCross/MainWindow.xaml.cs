@@ -1,18 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ColorCross.WindowFunctions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using ColorCross.WindowFunctions;
 
 namespace ColorCross
 {
@@ -25,28 +14,28 @@ namespace ColorCross
 		{
 			InitializeComponent();
 
-            Resizer.SetIntials(this);
-        }
+			Resizer.SetIntials(this);
+		}
 
-        private void exit_Click(object sender, RoutedEventArgs e)
-        {
-            Resizer.Exit();
-        }
+		private void exit_Click(object sender, RoutedEventArgs e)
+		{
+			Resizer.Exit();
+		}
 
-        private void max_Click(object sender, RoutedEventArgs e)
-        {
-            Button btn = (Button)sender;
-            Resizer.DoMaximize(this, btn);
-        }
+		private void max_Click(object sender, RoutedEventArgs e)
+		{
+			Button btn = (Button)sender;
+			Resizer.DoMaximize(this, btn);
+		}
 
-        private void min_Click(object sender, RoutedEventArgs e)
-        {
-            Resizer.Minimize(this);
-        }
-        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                this.DragMove();
-        }
-    }
+		private void min_Click(object sender, RoutedEventArgs e)
+		{
+			Resizer.Minimize(this);
+		}
+		private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			if (e.LeftButton == MouseButtonState.Pressed)
+				this.DragMove();
+		}
+	}
 }
