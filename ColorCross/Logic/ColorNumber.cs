@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ColorCross.Logic
 {
-	class LineOfColors:ObservableObject
+	class LineOfColors : ObservableObject
 	{
 		bool isDone;
 		public bool IsDone { get { return this.isDone; } set { SetProperty(ref isDone, value); } }
@@ -53,5 +53,4 @@ namespace ColorCross.Logic
 			}
 		}
 	}
-
 }

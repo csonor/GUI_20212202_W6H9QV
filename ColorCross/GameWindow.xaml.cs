@@ -3,10 +3,8 @@ using ColorCross.UI;
 using ColorCross.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace ColorCross
 {
@@ -39,8 +37,6 @@ namespace ColorCross
 			lstcols.ItemsSource = this.VM.Datas.Columns;
 			lstrows.ItemsSource = this.VM.Datas.Rows;
 		}
-
-
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{

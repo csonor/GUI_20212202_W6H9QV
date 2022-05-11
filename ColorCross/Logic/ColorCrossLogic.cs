@@ -9,7 +9,6 @@ using Color = System.Windows.Media.Color;
 
 namespace ColorCross.Logic
 {
-
 	class AllData
 	{
 		public AllData(int clickCount, List<List<CellData>> Status)

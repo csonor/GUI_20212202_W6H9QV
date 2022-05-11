@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Data;
 using System.Windows.Media;
 
@@ -7,7 +6,6 @@ namespace ColorCross.UI
 {
 	class BoolToBackGroundConverter : IValueConverter // ONLY if enough time
 	{
-		
 		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
 			bool val = (bool)value;

@@ -1,6 +1,5 @@
 ﻿using ColorCross.Logic;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
-using System.Collections.Generic;
 
 namespace ColorCross.ViewModel
 {
@@ -11,7 +10,6 @@ namespace ColorCross.ViewModel
 		public int ButtonSize { get; set; }
 
 		public ColorCrossData Datas { get; private set; }
-
 
 		int selectedColor;
 		public int SelectedColor
@@ -31,7 +29,6 @@ namespace ColorCross.ViewModel
 			this.Datas = logic.Datas;
 			this.ButtonSize = 15;
 			this.selectedColor = -1;
-
 		}
 
 		public GameWindowViewModel()
