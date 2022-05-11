@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using ColorCross.Logic;
+﻿using ColorCross.Logic;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
+using System.Collections.Generic;
 
 namespace ColorCross.ViewModel
 {
@@ -31,9 +25,9 @@ namespace ColorCross.ViewModel
 			set { SetProperty(ref selectedColor, value); }
 		}
 
-		public void Click(int x, int y)
+		public bool Click(int x, int y)
 		{
-			this.logic.Click(x, y, selectedColor);
+			return this.logic.Click(x, y, selectedColor);
 		}
 
 		public GameWindowViewModel(IColorCrossLogic logic)
