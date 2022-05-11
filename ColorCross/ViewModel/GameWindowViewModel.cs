@@ -14,8 +14,7 @@ namespace ColorCross.ViewModel
 	{
 		IColorCrossLogic logic;
 
-		//List<List<ColorData>> statuses;
-
+		public int ButtonSize { get; set; }
 		public List<LineOfColors> Rows { get; private set; }
 		public List<LineOfColors> Columns { get; private set; }
 		public int ClickCount { get; private set; }
@@ -36,6 +35,7 @@ namespace ColorCross.ViewModel
 		{
 			this.logic.Click(x, y, selectedColor);
 		}
+
 		public GameWindowViewModel(IColorCrossLogic logic)
 		{
 			this.logic = logic;
@@ -43,8 +43,7 @@ namespace ColorCross.ViewModel
 			this.selectedColor = 0;
 			this.Rows = new List<LineOfColors>(logic.Rows);
 			this.Columns = new List<LineOfColors>(logic.Columns);
-
-
+			this.ButtonSize = 10;
 		}
 
 		public GameWindowViewModel()
