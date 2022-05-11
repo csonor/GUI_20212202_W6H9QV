@@ -11,7 +11,7 @@ namespace ColorCross.Logic
 		LineOfColors[] Rows { get; }
 		List<List<CellData>> Status { get; }
 
-		bool Check();
+		bool CheckIfImageIsDone();
 		bool Click(int x, int y, int color);
 		void GameEnd();
 		void ImageReader(string filePath);

@@ -9,14 +9,14 @@ using Color = System.Windows.Media.Color;
 
 namespace ColorCross.Logic
 {
-	class ColorCrossLogic :  IColorCrossLogic
+	class ColorCrossLogic : IColorCrossLogic
 	{
 		int[,] pixels;
 		List<List<CellData>> status;
 		List<Color> colors;
 		LineOfColors[] rows;
 		LineOfColors[] columns;
-		int numberOfColoredLinesAndColumns; 
+		int numberOfColoredLinesAndColumns;
 		int currentCorrectLines;
 		Bitmap bmp;
 		string fileName;
@@ -55,6 +55,7 @@ namespace ColorCross.Logic
 			CountUniqueColors();
 			CountRowColors();
 			CountColumnColors();
+			CheckForCorrectLines();
 		}
 
 		void LoadPixelsFromFile()
@@ -151,30 +152,103 @@ namespace ColorCross.Logic
 			}
 		}
 
-		public bool Click(int x, int y, int color)
+		void CheckForCorrectLines()
 		{
-			Rows[x].IsDone = true;
-			Columns[y].IsDone = true;
-			status[x][y].Color = color;
-			ClickCount++;
-			return Check();
+			for (int i = 0; i < pixels.GetLength(0); i++)
+				ColorCheck(i, 0);
+
+			for (int i = 0; i < pixels.GetLength(1); i++)
+			{
+				ColorCheck(0, i);
+			}
 		}
 
-		public bool Check()
+		public bool Click(int x, int y, int color)
 		{
-			bool equal = true;
-			int i = 0;
-			while (i < pixels.GetLength(0))
+			status[x][y].Color = color;
+			ColorCheck(x, y);
+			ClickCount++;
+			return CheckIfImageIsDone();
+		}
+
+		void ColorCheck(int x, int y)
+		{
+			if (RowCheck(x))
 			{
-				int j = 0;
-				while (j < pixels.GetLength(1) && equal)
+				if (!Rows[x].IsDone)
 				{
-					equal = pixels[i, j] == status[i][j].Color;
-					j++;
+					currentCorrectLines++;
+					Rows[x].IsDone = true;
 				}
-				i++;
 			}
-			return equal;
+			else if (Rows[x].IsDone)
+			{
+				currentCorrectLines--;
+				Rows[x].IsDone = false;
+			}
+
+			if (ColumnCheck(y))
+			{
+				if (!Columns[y].IsDone)
+				{
+					currentCorrectLines++;
+					Columns[y].IsDone = true;
+				}
+			}
+			else if (Columns[y].IsDone)
+			{
+				currentCorrectLines--;
+				Columns[y].IsDone = false;
+			}
+		}
+
+		bool RowCheck(int x)
+		{
+			var rowColors = new List<LineOfColors.ColorNumber>();
+			for (int j = 0; j < pixels.GetLength(1); j++)
+			{
+				int k = j + 1;
+				int sum = 0;
+				var color = status[x][j].Color;
+				while (k < pixels.GetLength(1) && status[x][k].Color == color)
+				{
+					sum++;
+					k++;
+				}
+				if (color != -1)
+				{
+					rowColors.Add(new LineOfColors.ColorNumber { Color = color, Count = sum + 1 });
+				}
+				j = k - 1;
+			}
+			return rowColors.SequenceEqual(rows[x].Colors);
+		}
+
+		bool ColumnCheck(int y)
+		{
+			var columnColors = new List<LineOfColors.ColorNumber>();
+			for (int i = 0; i < pixels.GetLength(0); i++)
+			{
+				int k = i + 1;
+				int sum = 0;
+				var color = status[i][y].Color;
+				while (k < pixels.GetLength(0) && status[k][y].Color == color)
+				{
+					sum++;
+					k++;
+				}
+				if (color != -1)
+				{
+					columnColors.Add(new LineOfColors.ColorNumber { Color = color, Count = sum + 1 });
+				}
+				i = k - 1;
+			}
+			return columnColors.SequenceEqual(columns[y].Colors);
+		}
+
+		public bool CheckIfImageIsDone()
+		{
+			return numberOfColoredLinesAndColumns == currentCorrectLines;
 		}
 
 		public void GameEnd()
@@ -189,6 +263,7 @@ namespace ColorCross.Logic
 			if (File.Exists(path))
 				File.Delete(path);
 			status.ForEach(x => x = new List<CellData>());
+			CheckForCorrectLines();
 		}
 
 		class AllData

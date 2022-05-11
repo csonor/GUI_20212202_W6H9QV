@@ -77,7 +77,7 @@ namespace ColorCross
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			DialogResult = logic.Check();
+			DialogResult = logic.CheckIfImageIsDone();
 		}
 
 		private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
