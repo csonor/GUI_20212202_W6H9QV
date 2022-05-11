@@ -12,6 +12,5 @@ namespace ColorCross.Logic
 		bool Click(int x, int y, int color);
 		void GameEnd();
 		void ImageReader(string filePath);
-		void ResetGame();
 	}
 }
