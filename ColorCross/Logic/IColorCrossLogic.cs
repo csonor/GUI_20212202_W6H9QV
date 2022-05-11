@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Windows.Media;
-
-namespace ColorCross.Logic
+﻿namespace ColorCross.Logic
 {
 	internal interface IColorCrossLogic
 	{
-
 		ColorCrossData Datas { get; }
 
 		bool CheckIfImageIsDone();
