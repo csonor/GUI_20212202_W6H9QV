@@ -6,11 +6,11 @@
              xmlns:local="clr-namespace:ColorCross.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-                 Background="#9c7200">
-    <Grid>
-        <WrapPanel x:Name="wrp">
-            
-        </WrapPanel>
-
-    </Grid>
+             Background="#9c7200">
+	<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+		<Grid>
+			<WrapPanel x:Name="wrp">
+			</WrapPanel>
+		</Grid>
+	</ScrollViewer>
 </UserControl>

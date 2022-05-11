@@ -154,10 +154,28 @@ namespace ColorCross.Logic
 			}
 		}
 
-		public void Click(int x, int y, int color)
+		public bool Click(int x, int y, int color)
 		{
 			status[x][y].Color = color;
 			ClickCount++;
+			return Check();
+		}
+
+		public bool Check()
+		{
+			bool equal = true;
+			int i = 0;
+			while (i < pixels.GetLength(0))
+			{
+				int j = 0;
+				while (j < pixels.GetLength(1) && equal)
+				{
+					equal = pixels[i, j] == status[i][j].Color;
+					j++;
+				}
+				i++;
+			}
+			return equal;
 		}
 
 		public void GameEnd()

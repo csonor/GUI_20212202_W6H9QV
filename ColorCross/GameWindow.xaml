@@ -8,7 +8,8 @@
         xmlns:ui="clr-namespace:ColorCross.UI"
         mc:Ignorable="d"
         Title="GameWindow" Height="1080" Width="1920"
-		Closed="Window_Closed">
+		Closed="Window_Closed"
+		Closing="Window_Closing">
     <Window.Resources>
         <ui:IntToColorConverter x:Key="IntToColorConverter" />
         <DataTemplate x:Key="DataTemplate_colors" >
