@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ColorCross.Logic;
+using ColorCross.UI;
+using ColorCross.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -21,29 +24,42 @@ namespace ColorCross
     /// </summary>
     public partial class GameWindow : Window
     {
-        DispatcherTimer dt = new DispatcherTimer();
-        Stopwatch sw = new Stopwatch();
-        string currentTime = string.Empty;
+        GameWindowViewModel VM;
         public GameWindow(string Path)
         {
+            IColorCrossLogic logic = new ColorCrossLogic();
+            logic.ImageReader(Path);
+            VM = new GameWindowViewModel(logic);
             InitializeComponent();
-            dt.Tick += new EventHandler(dt_Tick);
-            dt.Interval = new TimeSpan(0, 0, 0, 0, 1);
-            sw.Start();
-            dt.Start();
-        }
-
-        void dt_Tick(object sender, EventArgs e)
-        {
-            if (sw.IsRunning)
+            IntToColorConverter converter = FindResource("IntToColorConverter") as IntToColorConverter;
+            converter.Colors = logic.Colors;
+            List<CellData> colors = new List<CellData>();
+            colors.Add(new CellData() { X = -1, Y = 0, Color = -1 });
+            for(int i=0; i < logic.Colors.Count; i++)
             {
-                TimeSpan ts = sw.Elapsed;
-                currentTime = String.Format("{0:00}:{1:00}",
-                ts.Minutes, ts.Seconds);
-                clocktxtblock.Text = currentTime;
+                colors.Add(new CellData() { X = i, Y = 0, Color = i });
             }
+            this.DataContext = this.VM;
+            lst.ItemsSource = this.VM.Statuses;
+            lst2.ItemsSource = colors;
+
+
         }
 
-            
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            CellData o = (CellData)b.DataContext;
+            VM.Click(o.X, o.Y);
+        }
+
+        private void ColorButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            CellData o = (CellData)b.DataContext;
+            VM.SelectedColor=o.Color;
+        }
     }
+
+
 }
