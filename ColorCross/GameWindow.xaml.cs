@@ -63,7 +63,11 @@ namespace ColorCross
 		{
 			Button b = (Button)sender;
 			CellData o = (CellData)b.DataContext;
-			VM.Click(o.X, o.Y);
+			if (VM.Click(o.X, o.Y))
+			{
+				MessageBox.Show("Kiraktad a képet!", "Kész a pálya", MessageBoxButton.OK, MessageBoxImage.Information);
+				Close();
+			}
 		}
 
 		private void ColorButton_Click(object sender, RoutedEventArgs e)

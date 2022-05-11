@@ -31,9 +31,9 @@ namespace ColorCross.ViewModel
 			set { SetProperty(ref selectedColor, value); }
 		}
 
-		public void Click(int x, int y)
+		public bool Click(int x, int y)
 		{
-			this.logic.Click(x, y, selectedColor);
+			return this.logic.Click(x, y, selectedColor);
 		}
 
 		public GameWindowViewModel(IColorCrossLogic logic)
