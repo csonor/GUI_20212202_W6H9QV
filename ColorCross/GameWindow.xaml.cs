@@ -24,33 +24,23 @@ namespace ColorCross
 			VM = new GameWindowViewModel(logic);
 			InitializeComponent();
 			IntToColorConverter converter = (IntToColorConverter)FindResource("IntToColorConverter");
-			converter.Colors = logic.Colors;
+			converter.Colors = logic.Datas.Colors;
 			IntToColorTextConverter converter2 = (IntToColorTextConverter)FindResource("IntToColorTextConverter");
-			converter2.Colors = logic.Colors;
+			converter2.Colors = logic.Datas.Colors;
 			List<CellData> colors = new List<CellData>();
 			colors.Add(new CellData() { X = -1, Y = 0, Color = -1 });
-			for (int i = 0; i < logic.Colors.Count; i++)
+			for (int i = 0; i < logic.Datas.Colors.Count; i++)
 			{
 				colors.Add(new CellData() { X = i, Y = 0, Color = i });
 			}
 			this.DataContext = this.VM;
-			lst.ItemsSource = this.VM.Statuses;
+			lst.ItemsSource = this.VM.Datas.Status;
 			lst2.ItemsSource = colors;
-			lstcols.ItemsSource = this.VM.Columns;
-			lstrows.ItemsSource = this.VM.Rows;
+			lstcols.ItemsSource = this.VM.Datas.Columns;
+			lstrows.ItemsSource = this.VM.Datas.Rows;
 		}
 
-		public static IEnumerable<T> FindVisualChilds<T>(DependencyObject depObj) where T : DependencyObject
-		{
-			if (depObj == null) yield return (T)Enumerable.Empty<T>();
-			for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
-			{
-				DependencyObject ithChild = VisualTreeHelper.GetChild(depObj, i);
-				if (ithChild == null) continue;
-				if (ithChild is T t) yield return t;
-				foreach (T childOfChild in FindVisualChilds<T>(ithChild)) yield return childOfChild;
-			}
-		}
+
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
