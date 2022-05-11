@@ -102,8 +102,12 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Label Content="{Binding Path=Datas.ClickCount}"/>
-            <ItemsControl x:Name="lst2" ItemTemplate="{DynamicResource DataTemplate_colors}" Grid.Column="1" />
+            <StackPanel>
+                <Label Content="Kattintások száma:"/>
+                <Label Content="{Binding Path=Datas.ClickCount}"/>
+                <Label Content="Színek:"/>
+                <ItemsControl x:Name="lst2" ItemTemplate="{DynamicResource DataTemplate_colors}" Grid.Column="1" />
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>
