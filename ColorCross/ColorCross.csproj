@@ -10,11 +10,13 @@
   <ItemGroup>
     <None Remove="Images\apple.bmp" />
     <None Remove="Images\chrome.bmp" />
+    <None Remove="Images\duck.bmp" />
     <None Remove="Images\frog.bmp" />
     <None Remove="Images\mario.bmp" />
     <None Remove="Images\penguin.bmp" />
     <None Remove="Images\sagittarius.bmp" />
     <None Remove="Images\sign.bmp" />
+    <None Remove="Images\tree.bmp" />
     <None Remove="Images\tutorial.bmp" />
     <None Remove="Images\windows.bmp" />
   </ItemGroup>
@@ -31,6 +33,9 @@
     <Content Include="Images\chrome.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\duck.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\frog.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -44,6 +49,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\sign.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\tree.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\tutorial.bmp">
