@@ -8,8 +8,7 @@ namespace ColorCross.UI
 	class IntToColorTextConverter : IValueConverter // ONLY if enough time
 	{
 		public List<Color> Colors { get; set; }
-		// VM => UI
-		// (int) 205 => 2m 5cm (string)
+
 		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
 			int val = (int)value;
@@ -19,8 +18,6 @@ namespace ColorCross.UI
 			return Brushes.Black;
 		}
 
-		// UI => VM
-		// (string) 1m 85cm => 185 (int)
 		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
 			throw new NotImplementedException();
