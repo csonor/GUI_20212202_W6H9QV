@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -8,7 +9,7 @@ using Color = System.Windows.Media.Color;
 
 namespace ColorCross.Logic
 {
-	class ColorCrossLogic : IColorCrossLogic
+	class ColorCrossLogic :  IColorCrossLogic
 	{
 		int[,] pixels;
 		List<List<CellData>> status;
@@ -19,6 +20,7 @@ namespace ColorCross.Logic
 		int currentCorrectLines;
 		Bitmap bmp;
 		string fileName;
+		//int clickCount;
 		public int ClickCount { get; set; }
 
 		public LineOfColors[] Rows { get => rows; }
@@ -97,6 +99,7 @@ namespace ColorCross.Logic
 		{
 			for (int i = 0; i < rows.Length; i++)
 			{
+				if (rows[i] == null) rows[i] = new LineOfColors();
 				for (int j = 0; j < bmp.Width; j++)
 				{
 					int k = j + 1;
@@ -124,6 +127,7 @@ namespace ColorCross.Logic
 		{
 			for (int i = 0; i < columns.Length; i++)
 			{
+				if (columns[i] == null) columns[i] = new LineOfColors();
 				for (int j = 0; j < bmp.Height; j++)
 				{
 					int k = j + 1;
@@ -149,6 +153,8 @@ namespace ColorCross.Logic
 
 		public bool Click(int x, int y, int color)
 		{
+			Rows[x].IsDone = true;
+			Columns[y].IsDone = true;
 			status[x][y].Color = color;
 			ClickCount++;
 			return Check();
