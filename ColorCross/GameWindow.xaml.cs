@@ -3,6 +3,7 @@ using ColorCross.UI;
 using ColorCross.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace ColorCross
 {
@@ -28,7 +30,7 @@ namespace ColorCross
 
 		public GameWindow(string path)
 		{
-			logic.ImageReader(path, out ts);
+			logic.ImageReader(path);
 			VM = new GameWindowViewModel(logic);
 			InitializeComponent();
 			IntToColorConverter converter = (IntToColorConverter)FindResource("IntToColorConverter");
@@ -62,7 +64,7 @@ namespace ColorCross
 
 		private void Window_Closed(object sender, EventArgs e)
 		{
-			logic.GameEnd(false, ts);
+			logic.GameEnd(false);
 		}
 	}
 
