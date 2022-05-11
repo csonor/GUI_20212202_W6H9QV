@@ -24,30 +24,14 @@ namespace ColorCross
 	/// </summary>
 	public partial class GameWindow : Window
 	{
-
-		public static IEnumerable<T> FindVisualChilds<T>(DependencyObject depObj) where T : DependencyObject
-		{
-			if (depObj == null) yield return (T)Enumerable.Empty<T>();
-			for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
-			{
-				DependencyObject ithChild = VisualTreeHelper.GetChild(depObj, i);
-				if (ithChild == null) continue;
-				if (ithChild is T t) yield return t;
-				foreach (T childOfChild in FindVisualChilds<T>(ithChild)) yield return childOfChild;
-			}
-		}
-
 		IColorCrossLogic logic = new ColorCrossLogic();
 		GameWindowViewModel VM;
-		TimeSpan ts;
 
 		public GameWindow(string path)
 		{
 			logic.ImageReader(path);
 			VM = new GameWindowViewModel(logic);
 			InitializeComponent();
-
-			
 			IntToColorConverter converter = (IntToColorConverter)FindResource("IntToColorConverter");
 			converter.Colors = logic.Colors;
 			List<CellData> colors = new List<CellData>();
@@ -61,10 +45,18 @@ namespace ColorCross
 			lst2.ItemsSource = colors;
 			lstcols.ItemsSource = this.VM.Columns;
 			lstrows.ItemsSource = this.VM.Rows;
+		}
 
-
-
-
+		public static IEnumerable<T> FindVisualChilds<T>(DependencyObject depObj) where T : DependencyObject
+		{
+			if (depObj == null) yield return (T)Enumerable.Empty<T>();
+			for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+			{
+				DependencyObject ithChild = VisualTreeHelper.GetChild(depObj, i);
+				if (ithChild == null) continue;
+				if (ithChild is T t) yield return t;
+				foreach (T childOfChild in FindVisualChilds<T>(ithChild)) yield return childOfChild;
+			}
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
@@ -86,12 +78,13 @@ namespace ColorCross
 			logic.GameEnd();
 		}
 
-        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			DialogResult = logic.Check();
+		}
 
-
-        }
-    }
-
-
+		private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+		{
+		}
+	}
 }
