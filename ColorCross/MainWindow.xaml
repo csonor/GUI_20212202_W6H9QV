@@ -49,17 +49,7 @@
                        Command="{Binding OpenGameMenuCommand}"    
                            />
 
-                <Button Content="Beállítások"
-                       Grid.Column="1"
-                       Background="Transparent"
-                       BorderThickness="0"
-                       Foreground="White"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       FontFamily="Fonts/#redhat"
-                       FontWeight="Medium"
-                       Command="{Binding OpenSettingsCommand}"
-                      />
+             
                 <Button Content="Eredmények"
                        Grid.Column="3"
                         Background="Transparent"
