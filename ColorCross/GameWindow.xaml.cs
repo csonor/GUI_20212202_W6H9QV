@@ -1,6 +1,7 @@
 ﻿using ColorCross.Logic;
 using ColorCross.UI;
 using ColorCross.ViewModel;
+using ColorCross.WindowFunctions;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -69,5 +70,23 @@ namespace ColorCross
 		private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
 		{
 		}
+
+		private void exit_Click(object sender, RoutedEventArgs e)
+		{
+			Resizer.Exit();
+		}
+
+		private void max_Click(object sender, RoutedEventArgs e)
+		{
+			Button btn = (Button)sender;
+			Resizer.DoMaximize(this, btn);
+		}
+
+		private void min_Click(object sender, RoutedEventArgs e)
+		{
+			Resizer.Minimize(this);
+		}
 	}
+
+
 }

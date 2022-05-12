@@ -9,7 +9,10 @@
 		SizeChanged="Window_SizeChanged"
 		Title="GameWindow" Height="600" Width="800"
 		Closing="Window_Closing"
-		Background="LightGray">
+		Background="LightGray"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        >
 	<Window.Resources>
 		<ui:IntToColorConverter x:Key="IntToColorConverter" />
         <ui:SelectedIntToColorConverter x:Key="SelectedIntToColorConverter" />
@@ -99,10 +102,16 @@
         </ScrollViewer>
         <Grid x:Name="GameDatas" Grid.Column="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                <Button x:Name="min" Click="min_Click" Height="20PX" Width="30PX" FontSize="10px" >_</Button>
+                <Button x:Name="full" Click="max_Click" Height="20PX" Width="30PX" FontSize="10px" FontFamily="webdings" >⛶</Button>
+                <Button x:Name="exit" Click="exit_Click" Height="20PX" Width="30PX" FontSize="10px">X</Button>
+            </StackPanel>
+            <StackPanel Grid.Row="2">
                 <Label Content="Kattintások száma:"/>
                 <Label Content="{Binding Path=Datas.ClickCount}"/>
                 <Label Content="Színek:"/>

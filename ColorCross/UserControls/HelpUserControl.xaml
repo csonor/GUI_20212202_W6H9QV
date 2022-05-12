@@ -7,14 +7,29 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Content="Mi az a ColorcrossBCsZ?"
+               Padding="10" Foreground="#000080" Background="LightGray" BorderBrush="Transparent"
+                 HorizontalContentAlignment="Center"
+                 FontSize="40"
+                 >
+          
+        </Label>
         <TextBox 
+            Grid.Row="1"
             Name="tbMultiLine"
             TextAlignment="Justify"
             FontSize="20"
             FontFamily="Fonts/#redhat"           
             TextWrapping="Wrap"
             AcceptsReturn="True"
+            BorderBrush="Transparent"
+            
             VerticalScrollBarVisibility="Visible"  Padding="10" Foreground="#000080" Background="LightGray" Text="
+            
  A ColorcrossBCsZ egy logikán alapuló pixel színező.
 A játék célja, hogy a pixeleket kiszínezve megkapjuk a pályán elrejtett képet. 
 A pixelek helyes színezését a rajzterület mellett lévő táblázat adatai teszik lehetővé. Ebben 
@@ -29,6 +44,8 @@ már helyesen kiszínezett pixelt is el tudjuk rontani egy rossz döntés eseté
 van kész, ha minden pixel helyesen van kiszínezve. 
 A következő képen egy feladatot láthatunk, mellette pedig a megoldását. Itt is látszik, hogy a 
 különböző színek nem feltétlenül egymás mellett kezdődnek.
-            "/>
+
+Ha a pályaválasztóba jobb clickelünk a képekre, akkor előjön egy kisebb menü ahol vissza tudjuk állítani a pályát alaphelyzetre, illetve meg tudjuk nézni hány kattintással jött ki a megoldás.
+            "/> 
     </Grid>
 </UserControl>
