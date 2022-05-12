@@ -12,7 +12,7 @@ namespace ColorCross.UI
 			int val = (int)value;
 			int self = (int)parameter;
 			if (val != self)
-				return Brushes.Transparent;
+				return Brushes.Gray;
 
 			return Brushes.Aqua;
 		}
@@ -27,7 +27,7 @@ namespace ColorCross.UI
 			int val = (int)values[0];
 			int self = (int)values[1];
 			if (val != self)
-				return Brushes.Transparent;
+				return Brushes.Gray;
 
 			return Brushes.Aqua;
 		}
