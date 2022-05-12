@@ -11,20 +11,23 @@ namespace ColorCross.Logic
 {
 	class AllData
 	{
-		public AllData(int clickCount, List<List<CellData>> Status)
+		public AllData(int clickCount, List<List<CellData>> Status, int timer)
 		{
 			this.ClickCount = clickCount;
 			this.Status = Status;
+			this.Timer = timer;
 		}
 
 		public int ClickCount { get; }
 		public List<List<CellData>> Status { get; }
+		public int Timer { get; }
 	}
 
 	class ColorCrossData : ObservableObject
 	{
 		int _clickCount;
 		int[,] _pixels;
+		int _timer;
 		List<List<CellData>> _status;
 		List<Color> _colors;
 		LineOfColors[] _rows;
@@ -37,6 +40,8 @@ namespace ColorCross.Logic
 		public LineOfColors[] Columns { get { return this._columns; } internal set { SetProperty(ref this._columns, value); } }
 		public List<Color> Colors { get { return this._colors; } internal set { SetProperty(ref this._colors, value); } }
 		public List<List<CellData>> Status { get { return this._status; } internal set { SetProperty(ref this._status, value); } }
+		public int Timer { get { return this._timer; } internal set { SetProperty(ref this._timer,value); } }
+
 
 		public ColorCrossData()
 		{
@@ -46,6 +51,7 @@ namespace ColorCross.Logic
 			_colors = new List<Color>();
 			_rows = new LineOfColors[0];
 			_columns = new LineOfColors[0];
+			_timer = 0;
 		}
 	}
 
@@ -66,6 +72,7 @@ namespace ColorCross.Logic
 		public LineOfColors[] Columns { get { return datas.Columns; } private set { datas.Columns = value; } }
 		public List<Color> Colors { get { return datas.Colors; } private set { datas.Colors = value; } }
 		public List<List<CellData>> Status { get { return datas.Status; } private set { datas.Status = value; } }
+		public int Timer { get { return datas.Timer; } private set { datas.Timer = value; } }
 
 		public ColorCrossLogic()
 		{
@@ -101,6 +108,7 @@ namespace ColorCross.Logic
 			if (data == null) return;
 			ClickCount = data.ClickCount;
 			Status = data.Status;
+			Timer = data.Timer;
 		}
 
 		void CreateCellDataList()
@@ -205,6 +213,7 @@ namespace ColorCross.Logic
 			Status[x][y].Color = color;
 			ColorCheck(x, y);
 			ClickCount++;
+			int timer_for_save = Timer;
 			return CheckIfImageIsDone();
 		}
 
@@ -290,7 +299,8 @@ namespace ColorCross.Logic
 
 		public void GameEnd()
 		{
-			var json = JsonSerializer.Serialize(new AllData(ClickCount, Status), typeof(AllData));
+			int timer_for_save = Timer;
+			var json = JsonSerializer.Serialize(new AllData(ClickCount, Status, Timer), typeof(AllData));
 			File.WriteAllText($"{fileName}.json", json);
 		}
 	}
