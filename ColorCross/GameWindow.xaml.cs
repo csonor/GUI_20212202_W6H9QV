@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace ColorCross
 {
@@ -17,7 +18,7 @@ namespace ColorCross
 	{
 		IColorCrossLogic logic = new ColorCrossLogic();
 		GameWindowViewModel VM;
-	
+		private DispatcherTimer timer;
 		public GameWindow(string path)
 		{
 			logic.ImageReader(path);
@@ -38,8 +39,17 @@ namespace ColorCross
 			lst2.ItemsSource = colors;
 			lstcols.ItemsSource = this.VM.Datas.Columns;
 			lstrows.ItemsSource = this.VM.Datas.Rows;
+			this.timer = new DispatcherTimer();
+			
+			timer.Interval = TimeSpan.FromSeconds(1);
+			timer.Tick += TimerTickEvent;
+			timer.Start();
 		}
 
+		private void TimerTickEvent(object sender, EventArgs e)
+        {
+			this.VM.Datas.Timer++;
+        }
 	
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
@@ -67,6 +77,7 @@ namespace ColorCross
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			DialogResult = logic.CheckIfImageIsDone();
+			this.timer.Stop();
 		}
 
 		private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
