@@ -18,7 +18,7 @@
         
 		<DataTemplate x:Key="DataTemplate_colors" >
             <Button Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}" 
-                    Width="40" Height="40" Click="ColorButton_Click" BorderThickness="3" >
+                    Width="40" Height="40" Click="ColorButton_Click" BorderThickness="2" >
                 <Button.BorderBrush>
                     <MultiBinding Converter="{StaticResource SelectedIntToColorConverter}">
                         <Binding Path="Color"/>
