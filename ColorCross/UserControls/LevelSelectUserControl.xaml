@@ -13,7 +13,7 @@
 			<MenuItem Header="Reset"
                       Click="Reset_Click"
                       CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent}"/>
-			<MenuItem Header="Kattintások száma"
+			<MenuItem Header="Statisztika"
                       Click="ClickNumber_Click"
                       CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent}" />
 		</ContextMenu>

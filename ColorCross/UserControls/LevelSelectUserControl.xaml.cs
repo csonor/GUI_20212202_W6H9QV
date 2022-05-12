@@ -1,4 +1,4 @@
-using ColorCross.Logic;
+Ôªøusing ColorCross.Logic;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
 
 namespace ColorCross.UserControls
 {
@@ -61,6 +60,7 @@ namespace ColorCross.UserControls
 						Margin = new Thickness(50),
 						Padding = new Thickness(50),
 						Background = brush,
+						BorderThickness = new Thickness(3),
 						ContextMenu = (ContextMenu)Resources["contextMenu"]
 					});
 				}
@@ -70,6 +70,7 @@ namespace ColorCross.UserControls
 						Content = $"{bmp.Width} x {bmp.Height}",
 						Margin = new Thickness(50),
 						Padding = new Thickness(50),
+						BorderThickness = new Thickness(3),
 						Command = new RelayCommand(() => OpenGame(path[j]))
 					});
 			}
@@ -95,8 +96,10 @@ namespace ColorCross.UserControls
 			var clickedItem = FindClickedItem(sender);
 			if (clickedItem != null)
 			{
-				int clicks = JsonSerializer.Deserialize<AllData>(File.ReadAllText(clickedItem.Name + ".json")).ClickCount;
-				MessageBox.Show($"A kÈp {clicks} kattint·s ut·n lett kirakva.");
+				var data = JsonSerializer.Deserialize<AllData>(File.ReadAllText(clickedItem.Name + ".json"));
+				int clicks = data.ClickCount;
+				int timer = data.Timer;
+				MessageBox.Show($"Kattint√°sok sz√°ma: {clicks}\nEltelt id≈ë: {timer}");
 			}
 		}
 
