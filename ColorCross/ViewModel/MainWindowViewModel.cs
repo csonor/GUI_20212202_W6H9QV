@@ -21,11 +21,6 @@ namespace ColorCross.ViewModel
 		}
 
 
-
-		public RelayCommand OpenScoreBoardCommand { get; set; }
-		public ScoreBoardUserControl ScoreBoardView { get; set; }
-
-
 		public RelayCommand OpenHelpCommand { get; set; }
 		public HelpUserControl HelpView { get; set; }
 
@@ -39,7 +34,7 @@ namespace ColorCross.ViewModel
 			GameMenuView = new LevelSelectUserControl();
 		
 			HelpView = new HelpUserControl();
-			ScoreBoardView = new ScoreBoardUserControl();
+
 			currentView = GameMenuView;
 
 		;
@@ -51,10 +46,7 @@ namespace ColorCross.ViewModel
 			{
 				CurrentView = GameMenuView;
 			});
-			OpenScoreBoardCommand = new RelayCommand(() =>
-			{
-				CurrentView = ScoreBoardView;
-			});
+		
 
 		}
 	}

@@ -8,36 +8,34 @@
         
        mc:Ignorable="d"     
         Title="MainWindow" Height="450" Width="800"
-        WindowStyle="None"
-        Background="#9c7200"
-        ResizeMode="CanResizeWithGrip"
-        AllowsTransparency="True">
+    
+        Background="LightGray"
+        >
     <Window.DataContext>
         <local1:MainWindowViewModel></local1:MainWindowViewModel>
     </Window.DataContext>
-        <Border MouseDown="Border_MouseDown">
+    <Border MouseDown="Border_MouseDown">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition  Width="0.25*"/>
-                <ColumnDefinition />
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid Background="#ebac00"
-              Grid.ColumnSpan="2">
+            
+            <Grid Background="#7d7b77">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
+
                     <ColumnDefinition/>
                     <ColumnDefinition/>
 
                 </Grid.ColumnDefinitions>
                 <Button 
                          Content="Játék"
-                       Grid.Column="0"
+                       Grid.Column="1"
                         Background="Transparent"
                        BorderThickness="0"
                        Foreground="White"
@@ -49,20 +47,8 @@
                        Command="{Binding OpenGameMenuCommand}"    
                            />
 
-             
-                <Button Content="Eredmények"
-                       Grid.Column="1"
-                        Background="Transparent"
-                       BorderThickness="0"
-                       Foreground="White"
-                       Padding="10"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontFamily="Fonts/#redhat"
-                       
-                       FontWeight="Medium"
-                       Command="{Binding OpenScoreBoardCommand}"    
-                           />
+
+
                 <Button Content="Súgó"
                        Grid.Column="2"
                        Background="Transparent"
@@ -74,21 +60,16 @@
                        FontWeight="Medium"
                         Command="{Binding OpenHelpCommand}"
                       />
-                <StackPanel Grid.Column="3" Margin="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" >
-                    <Button x:Name="max" Click="max_Click" Background="#9c7200" Foreground="White" Width="20" Height="15" Margin="5,0,5,0" FontSize="8" FontFamily="Fonts/#webdings">1</Button>
-                    <Button x:Name="min" Click="min_Click" Background="#9c7200" Foreground="White" Width="20" Height="15" Margin="5,0,5,0" FontSize="8" Grid.Column="4" Content="-"></Button>
-                    <Button x:Name="exit" Click="exit_Click"  Background="#9c7200" Foreground="White" Width="20" Height="15" Margin="5,0,5,0" FontSize="8px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >X</Button>
-                </StackPanel>
+
             </Grid>
 
-            <ContentControl Grid.ColumnSpan="2" Grid.Row="1"
+            <ContentControl Grid.Row="1"
                             Grid.Column="0"
-                            Margin="10"
+                            Margin="10,10,10,10"
+                            HorizontalContentAlignment="Center"
                             BorderThickness="0"
                             Content="{Binding CurrentView}"
                             />
-
-
         </Grid>
     </Border>
 </Window>
