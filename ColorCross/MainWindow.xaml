@@ -40,30 +40,13 @@
                         Background="Transparent"
                        BorderThickness="0"
                        Foreground="White"
-                       Padding="10"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        FontFamily="Fonts/#redhat"
                        FontWeight="Medium"
                        Command="{Binding OpenGameMenuCommand}" Height="41" >
-                    <Button.ContentTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="Játék kezdése" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="0" Padding="0" >
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
-                                        <Style.Triggers>
-                                            <Trigger Property ="IsMouseOver" Value="True">
-                                                <Setter Property= "Background" Value="Black"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                        </DataTemplate>
-                    </Button.ContentTemplate>
 
                 </Button>
-
 
 
                 <Button Content="Súgó"
