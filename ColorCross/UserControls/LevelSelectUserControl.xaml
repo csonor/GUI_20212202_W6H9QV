@@ -8,6 +8,16 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Background="#9c7200"
 			 Loaded="UserControl_Loaded">
+	<UserControl.Resources>
+		<ContextMenu x:Key="contextMenu">
+			<MenuItem Header="Reset"
+                      Click="Reset_Click"
+                      CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent}"/>
+			<MenuItem Header="Kattintások száma"
+                      Click="ClickNumber_Click"
+                      CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent}" />
+		</ContextMenu>
+	</UserControl.Resources>
 	<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
 		<Grid>
 			<WrapPanel x:Name="wrp">

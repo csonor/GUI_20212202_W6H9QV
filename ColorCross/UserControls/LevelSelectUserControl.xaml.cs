@@ -1,8 +1,10 @@
+using ColorCross.Logic;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
@@ -33,7 +35,6 @@ namespace ColorCross.UserControls
 
 			var json = JsonSerializer.Serialize(completedLevels);
 			File.WriteAllText("levels.json", json);
-			wrp.Children.Clear();
 			UserControl_Loaded(this, new RoutedEventArgs());
 		}
 
@@ -43,11 +44,27 @@ namespace ColorCross.UserControls
 			if (File.Exists("levels.json"))
 				completedLevels = JsonSerializer.Deserialize<List<string>>(File.ReadAllText("levels.json"));
 
+			wrp.Children.Clear();
 			for (int i = 0; i < path.Length; i++)
 			{
 				int j = i;
 				Bitmap bmp = new Bitmap(path[i]);
-				if (!completedLevels.Contains(path[i]))
+				if (completedLevels.Contains(path[i]))
+				{
+					var brush = new ImageBrush();
+					brush.ImageSource = new BitmapImage(new Uri(path[i], UriKind.Relative));
+					string fileName = new string(path[i].Split('\\')[1].TakeWhile(x => x != '.').ToArray());
+
+					wrp.Children.Add(new Button
+					{
+						Name = fileName,
+						Margin = new Thickness(50),
+						Padding = new Thickness(50),
+						Background = brush,
+						ContextMenu = (ContextMenu)Resources["contextMenu"]
+					});
+				}
+				else
 					wrp.Children.Add(new Button
 					{
 						Content = $"{bmp.Width} x {bmp.Height}",
@@ -55,18 +72,45 @@ namespace ColorCross.UserControls
 						Padding = new Thickness(50),
 						Command = new RelayCommand(() => OpenGame(path[j]))
 					});
-				else
-				{
-					var brush = new ImageBrush();
-					brush.ImageSource = new BitmapImage(new Uri(path[i], UriKind.Relative));
-					wrp.Children.Add(new Button
-					{
-						Margin = new Thickness(50),
-						Padding = new Thickness(50),
-						Background = brush
-					});
-				}
 			}
+		}
+
+		private static Button FindClickedItem(object sender)
+		{
+			var mi = (MenuItem)sender;
+			if (mi == null)
+			{
+				return null;
+			}
+			var cm = (ContextMenu)mi.CommandParameter;
+			if (cm == null)
+			{
+				return null;
+			}
+			return (Button)cm.PlacementTarget;
+		}
+
+		private void ClickNumber_Click(object sender, RoutedEventArgs e)
+		{
+			var clickedItem = FindClickedItem(sender);
+			if (clickedItem != null)
+			{
+				int clicks = JsonSerializer.Deserialize<AllData>(File.ReadAllText(clickedItem.Name + ".json")).ClickCount;
+				MessageBox.Show($"A kép {clicks} kattintás után lett kirakva.");
+			}
+		}
+
+		private void Reset_Click(object sender, RoutedEventArgs e)
+		{
+			var clickedItem = FindClickedItem(sender);
+			if (clickedItem != null)
+			{
+				File.Delete(clickedItem.Name + ".json");
+				completedLevels.Remove(completedLevels.FirstOrDefault(x => x.Contains(clickedItem.Name)));
+				var json = JsonSerializer.Serialize(completedLevels);
+				File.WriteAllText("levels.json", json);
+			}
+			UserControl_Loaded(this, new RoutedEventArgs());
 		}
 	}
 }

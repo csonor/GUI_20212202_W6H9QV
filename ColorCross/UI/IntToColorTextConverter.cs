@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace ColorCross.UI
 {
-	class IntToColorConverter : IValueConverter // ONLY if enough time
+	class IntToColorTextConverter : IValueConverter // ONLY if enough time
 	{
 		public List<Color> Colors { get; set; }
 
@@ -13,11 +13,10 @@ namespace ColorCross.UI
 		{
 			int val = (int)value;
 			if (val < 0)
-				return Brushes.Transparent;
-
-			return new SolidColorBrush(Colors[val]);
+				return Brushes.Black;
+			if (Colors[val].R < 128 && Colors[val].G < 128 && Colors[val].B < 128) return Brushes.White;
+			return Brushes.Black;
 		}
-
 
 		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
