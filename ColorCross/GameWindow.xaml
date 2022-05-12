@@ -18,7 +18,7 @@
         
 		<DataTemplate x:Key="DataTemplate_colors" >
             <Button Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}" 
-                    Width="40" Height="40" Click="ColorButton_Click" BorderThickness="2" >
+                    Width="40" Height="40" Click="ColorButton_Click" BorderThickness="3" >
                 <Button.BorderBrush>
                     <MultiBinding Converter="{StaticResource SelectedIntToColorConverter}">
                         <Binding Path="Color"/>
@@ -94,7 +94,7 @@
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
-                <ItemsControl x:Name="lst" ItemTemplate="{DynamicResource DataTemplate_Level1}" Grid.Column="0" Grid.Row="0" BorderThickness="1" BorderBrush="Black" />
+                <ItemsControl x:Name="lst" ItemTemplate="{DynamicResource DataTemplate_Level1}" Grid.Column="0" Grid.Row="0" BorderThickness="2" BorderBrush="Black" />
             </Grid>
         </ScrollViewer>
         <Grid x:Name="GameDatas" Grid.Column="1">
@@ -106,7 +106,7 @@
                 <Label Content="Kattintások száma:"/>
                 <Label Content="{Binding Path=Datas.ClickCount}"/>
                 <Label Content="Színek:"/>
-                <ItemsControl x:Name="lst2" ItemTemplate="{DynamicResource DataTemplate_colors}" Grid.Column="1" />
+                <ItemsControl x:Name="lst2" ItemTemplate="{DynamicResource DataTemplate_colors}" Grid.Column="1"  />
             </StackPanel>
         </Grid>
     </Grid>
