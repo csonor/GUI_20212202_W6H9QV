@@ -19,7 +19,7 @@ namespace ColorCross
 
 		private void exit_Click(object sender, RoutedEventArgs e)
 		{
-			Resizer.Exit();
+			Resizer.Exit(this);
 		}
 
 		private void max_Click(object sender, RoutedEventArgs e)
