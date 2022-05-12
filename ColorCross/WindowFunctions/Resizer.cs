@@ -112,7 +112,6 @@ namespace ColorCross.WindowFunctions
 			win.WindowState = WindowState.Minimized;
 		}
 
-		
 		public static void Exit(Window window)
 		{
 			window.Close();

@@ -17,7 +17,7 @@ namespace ColorCross
 	{
 		IColorCrossLogic logic = new ColorCrossLogic();
 		GameWindowViewModel VM;
-	
+
 		public GameWindow(string path)
 		{
 			logic.ImageReader(path);
@@ -40,7 +40,7 @@ namespace ColorCross
 			lstrows.ItemsSource = this.VM.Datas.Rows;
 		}
 
-	
+
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
 			Button b = (Button)sender;
@@ -94,6 +94,4 @@ namespace ColorCross
 				this.DragMove();
 		}
 	}
-
-
 }

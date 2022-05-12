@@ -90,23 +90,23 @@
                 <ItemsControl x:Name="lstcols" ItemTemplate="{DynamicResource DataTemplate_cols_l1}" Grid.Column="0" Grid.Row="1" VerticalAlignment="Bottom">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal" />
+                            <StackPanel Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
-                <ItemsControl x:Name="lst" ItemTemplate="{DynamicResource DataTemplate_Level1}" Grid.Column="0" Grid.Row="0" BorderThickness="2" BorderBrush="Black" />
+                <ItemsControl x:Name="lst" ItemTemplate="{DynamicResource DataTemplate_Level1}" Grid.Column="0" Grid.Row="0" BorderThickness="2" BorderBrush="Black"/>
             </Grid>
         </ScrollViewer>
         <Grid x:Name="GameDatas" Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <StackPanel>
                 <Label Content="Kattintások száma:"/>
                 <Label Content="{Binding Path=Datas.ClickCount}"/>
                 <Label Content="Színek:"/>
-                <ItemsControl x:Name="lst2" ItemTemplate="{DynamicResource DataTemplate_colors}" Grid.Column="1"  />
+                <ItemsControl x:Name="lst2" ItemTemplate="{DynamicResource DataTemplate_colors}" Grid.Column="1"/>
             </StackPanel>
         </Grid>
     </Grid>
