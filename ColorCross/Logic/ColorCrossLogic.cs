@@ -90,7 +90,7 @@ namespace ColorCross.Logic
 			Rows = new LineOfColors[bmp.Height];
 			Columns = new LineOfColors[bmp.Width];
 
-			fileName = new string(filePath.Split('\\')[1].TakeWhile(x => x != '.').ToArray());
+			fileName = new string(filePath.Split('\\').Last().TakeWhile(x => x != '.').ToArray());
 			if (File.Exists(fileName + ".json"))
 				LoadPixelsFromFile();
 			else CreateCellDataList();

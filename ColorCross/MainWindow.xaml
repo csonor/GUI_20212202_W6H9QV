@@ -53,10 +53,10 @@
                             />
             
             <StackPanel x:Name="stackpanel" Grid.Row="1" HorizontalAlignment="center" VerticalAlignment="center">
-                <Label HorizontalAlignment="Center"  Content="ColorCross" FontSize="100"></Label>
+                <Label HorizontalAlignment="Center"  Content="ColorCross" FontSize="140"></Label>
                 <Button Padding="10" x:Name="selectbutton" BorderBrush="Transparent" Background="Transparent"  Content="Játék" Click="LevelSelector_Click" FontSize="60"></Button>
                 <Button Padding="10" x:Name="helper" BorderBrush="Transparent" Background="Transparent"  FontSize="60" Content="Súgó" Click="Helper_click"></Button>
-                <Button Padding="10" x:Name="upload" BorderBrush="Transparent" Background="Transparent"  FontSize="60" Content="Egyéni kép importálása" Click="Upload_Click"></Button>
+                <Button Padding="10" x:Name="upload" BorderBrush="Transparent" Background="Transparent"  FontSize="60" Content="Játék saját képpel" Click="Upload_Click"></Button>
             </StackPanel>
 
         </Grid>

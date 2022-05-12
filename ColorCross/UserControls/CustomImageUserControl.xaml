@@ -8,14 +8,15 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Background="LightGray"
              >
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Label Height="60"  FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="40" Margin="10">CSAK BMP TÍPUSÚ FÁJLOKAT LEHET MEGNYITNI</Label>
-
-        <Button FontSize="20" Margin="10" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Importálás" Name="btnOpenFile"  Click="btnOpenFile_Click" ></Button>
-        <Button FontSize="20" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Létrehozás" Margin="10"></Button>
-    </Grid>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="10*"></RowDefinition>
+			<RowDefinition Height="2*"></RowDefinition>
+		</Grid.RowDefinitions>
+		<StackPanel>
+			<Label Height="60"  FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="40" Margin="0,20,0,0">CSAK BMP TÍPUSÚ FÁJLOKAT LEHET MEGNYITNI</Label>
+			<Label Height="60"  FontWeight="Medium" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="40" Margin="0,50,0,0">Maximum méret 50x50</Label>
+		</StackPanel>
+		<Button FontSize="20" Margin="10" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Megnyitás" Name="btnOpenFile"  Click="btnOpenFile_Click" ></Button>
+	</Grid>
 </UserControl>
