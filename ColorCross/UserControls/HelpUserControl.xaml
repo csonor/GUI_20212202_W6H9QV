@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ColorCross.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{StaticResource CustomFont}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"></RowDefinition>
@@ -19,6 +20,7 @@
           
         </Label>
         <TextBox 
+           
             Grid.Row="1"
             Name="tbMultiLine"
             TextAlignment="Justify"
@@ -27,7 +29,7 @@
             TextWrapping="Wrap"
             AcceptsReturn="True"
             BorderBrush="Transparent"
-            
+            IsReadOnly="True"
             VerticalScrollBarVisibility="Visible"  Padding="10" Foreground="#000080" Background="LightGray" Text="
             
  A ColorcrossBCsZ egy logikán alapuló pixel színező.

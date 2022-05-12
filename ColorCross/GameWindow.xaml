@@ -9,7 +9,10 @@
 		SizeChanged="Window_SizeChanged"
 		Title="GameWindow" Height="600" Width="800"
 		Closing="Window_Closing"
-		Background="LightGray">
+		Background="LightGray"
+         Style="{StaticResource CustomFont}"
+        >
+    
     <Window.Resources>
         <ui:IntToColorConverter x:Key="IntToColorConverter" />
         <ui:SelectedIntToColorConverter x:Key="SelectedIntToColorConverter" />
@@ -29,11 +32,11 @@
         </DataTemplate>
 
         <DataTemplate x:Key="DataTemplate_cols">
-            <Button Content="{Binding Path=Count}" Foreground="{Binding Path=Color, Converter={StaticResource IntToColorTextConverter}}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}"  Height="20" Width="20" Margin="1,1,1,1" IsHitTestVisible="False" FontSize="12"/>
+            <Button Content="{Binding Path=Count}" Foreground="{Binding Path=Color, Converter={StaticResource IntToColorTextConverter}}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}"  Height="20" Width="20" Margin="1,1,1,1" IsHitTestVisible="False" FontSize="14"/>
         </DataTemplate>
 
         <DataTemplate x:Key="DataTemplate_rows">
-            <Button Content="{Binding Path=Count}" Foreground="{Binding Path=Color, Converter={StaticResource IntToColorTextConverter}}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}"   Height="20" Width="20" Margin="1,1,1,1" IsHitTestVisible="False" FontSize="12"/>
+            <Button Content="{Binding Path=Count}" Foreground="{Binding Path=Color, Converter={StaticResource IntToColorTextConverter}}" Background="{Binding Path=Color, Converter={StaticResource IntToColorConverter}}"   Height="20" Width="20" Margin="1,1,1,1" IsHitTestVisible="False" FontSize="14"/>
         </DataTemplate>
 
 
@@ -102,13 +105,13 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <StackPanel>
-                <Label Content="Kattintások száma:"/>
-                <Label Content="{Binding Path=Datas.ClickCount}"/>
-                <Label Content="Eltelt idő:"/>
-                <Label Content="{Binding Path=Datas.Timer}"/>
-                <Label Content="Színek:"/>
-                <ItemsControl x:Name="lst2" ItemTemplate="{DynamicResource DataTemplate_colors}" Grid.Column="1"/>
+            <StackPanel  >
+                <Label Content="Kattintások száma:" FontSize="14"/>
+                <Label Content="{Binding Path=Datas.ClickCount}" FontSize="14"/>
+                <Label Content="Eltelt idő:" FontSize="14"/>
+                <Label Content="{Binding Path=Datas.Timer}" FontSize="14"/>
+                <Label Content="Színek:" FontSize="14"/>
+                <ItemsControl x:Name="lst2" ItemTemplate="{DynamicResource DataTemplate_colors}"  Grid.Column="1"/>
             </StackPanel>
         </Grid>
     </Grid>
