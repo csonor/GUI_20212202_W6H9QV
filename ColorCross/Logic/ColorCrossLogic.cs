@@ -40,7 +40,7 @@ namespace ColorCross.Logic
 		public LineOfColors[] Columns { get { return this._columns; } internal set { SetProperty(ref this._columns, value); } }
 		public List<Color> Colors { get { return this._colors; } internal set { SetProperty(ref this._colors, value); } }
 		public List<List<CellData>> Status { get { return this._status; } internal set { SetProperty(ref this._status, value); } }
-		public int Timer { get { return this._timer; } internal set { SetProperty(ref this._timer,value); } }
+		public int Timer { get { return this._timer; } internal set { SetProperty(ref this._timer, value); } }
 
 
 		public ColorCrossData()
@@ -57,7 +57,6 @@ namespace ColorCross.Logic
 
 	class ColorCrossLogic : IColorCrossLogic
 	{
-
 		int numberOfColoredLinesAndColumns;
 		int currentCorrectLines;
 		Bitmap bmp;

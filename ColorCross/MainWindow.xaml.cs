@@ -43,15 +43,15 @@ namespace ColorCross
 		private void LevelSelector_Click(object sender, RoutedEventArgs e)
 		{
 			menu.Visibility = Visibility.Visible;
-			menu.Content = new LevelSelectUserControl();		
+			menu.Content = new LevelSelectUserControl();
 			closebutton.Visibility = Visibility.Visible;
 			stackpanel.Visibility = Visibility.Collapsed;
 		}
 		private void Helper_click(object sender, RoutedEventArgs e)
 		{
-		
+
 			menu.Visibility = Visibility.Visible;
-			menu.Content = new HelpUserControl();	
+			menu.Content = new HelpUserControl();
 			closebutton.Visibility = Visibility.Visible;
 			stackpanel.Visibility = Visibility.Collapsed;
 
@@ -60,18 +60,16 @@ namespace ColorCross
 		private void Upload_Click(object sender, RoutedEventArgs e)
 		{
 			menu.Visibility = Visibility.Visible;
-			menu.Content = new CustomImageUserControl();	
+			menu.Content = new CustomImageUserControl();
 			closebutton.Visibility = Visibility.Visible;
 			stackpanel.Visibility = Visibility.Collapsed;
 		}
 
 		private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-			menu.Visibility = Visibility.Collapsed;			
+		{
+			menu.Visibility = Visibility.Collapsed;
 			closebutton.Visibility = Visibility.Collapsed;
 			stackpanel.Visibility = Visibility.Visible;
-
-
 		}
-    }
+	}
 }

@@ -56,7 +56,7 @@ namespace ColorCross.UserControls
 					string fileName = new string(path[i].Split('\\')[1].TakeWhile(x => x != '.').ToArray());
 
 					wrp.Children.Add(new Button
-					{						
+					{
 						Name = fileName,
 						Margin = new Thickness(50),
 						Padding = new Thickness(50),
@@ -74,7 +74,7 @@ namespace ColorCross.UserControls
 						Padding = new Thickness(50),
 						BorderThickness = new Thickness(3),
 						Command = new RelayCommand(() => OpenGame(path[j]))
-					});;
+					});
 			}
 		}
 
