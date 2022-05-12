@@ -6,8 +6,6 @@ namespace ColorCross.ViewModel
 {
 	public class MainWindowViewModel : ObservableRecipient
 	{
-
-
 		private object currentView;
 
 		public object CurrentView
@@ -20,24 +18,20 @@ namespace ColorCross.ViewModel
 			}
 		}
 
-
 		public RelayCommand OpenHelpCommand { get; set; }
 		public HelpUserControl HelpView { get; set; }
 
 		public RelayCommand OpenGameMenuCommand { get; set; }
 		public LevelSelectUserControl GameMenuView { get; set; }
 
-
 		public MainWindowViewModel()
 		{
-
 			GameMenuView = new LevelSelectUserControl();
-		
+
 			HelpView = new HelpUserControl();
 
 			currentView = GameMenuView;
 
-		;
 			OpenHelpCommand = new RelayCommand(() =>
 			{
 				CurrentView = HelpView;
@@ -46,8 +40,6 @@ namespace ColorCross.ViewModel
 			{
 				CurrentView = GameMenuView;
 			});
-		
-
 		}
 	}
 }

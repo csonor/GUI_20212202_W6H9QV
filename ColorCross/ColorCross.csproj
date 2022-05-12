@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="Images\apple.bmp" />
+    <None Remove="Images\apple_logo.bmp" />
     <None Remove="Images\butterfly.bmp" />
     <None Remove="Images\chrome.bmp" />
     <None Remove="Images\cocktail.bmp" />
@@ -35,6 +36,9 @@
 
   <ItemGroup>
     <Content Include="Images\apple.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\apple_logo.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\butterfly.bmp">

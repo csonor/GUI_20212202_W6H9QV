@@ -1,4 +1,4 @@
-﻿using ColorCross.Logic;
+using ColorCross.Logic;
 using ColorCross.UI;
 using ColorCross.ViewModel;
 using ColorCross.WindowFunctions;
@@ -105,6 +105,4 @@ namespace ColorCross
 				this.DragMove();
 		}
 	}
-
-
 }
