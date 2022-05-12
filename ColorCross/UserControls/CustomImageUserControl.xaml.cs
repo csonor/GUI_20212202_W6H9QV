@@ -1,5 +1,7 @@
 ﻿using Microsoft.Win32;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -25,7 +27,11 @@ namespace ColorCross.UserControls
 				Bitmap bmp = new Bitmap(path);
 				if (bmp.Width > 50 || bmp.Height > 50)
 					MessageBox.Show("A kép mérete túl nagy!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
-				else new GameWindow(path).ShowDialog();
+				else if (new GameWindow(path).ShowDialog() == true)
+				{
+					string fileName = new string(path.Split('\\').Last().TakeWhile(x => x != '.').ToArray());
+					File.Delete(fileName + ".json");
+				}
 			}
 		}
 	}
