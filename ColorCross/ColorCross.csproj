@@ -24,7 +24,6 @@
     <None Remove="Images\sign.bmp" />
     <None Remove="Images\swan.bmp" />
     <None Remove="Images\tree.bmp" />
-    <None Remove="Images\tutorial.bmp" />
     <None Remove="Images\watermelon.bmp" />
     <None Remove="Images\windows.bmp" />
   </ItemGroup>
@@ -81,9 +80,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\tree.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\tutorial.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\watermelon.bmp">
