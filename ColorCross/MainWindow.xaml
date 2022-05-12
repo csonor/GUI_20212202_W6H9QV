@@ -4,12 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ColorCross"
-        xmlns:local1="clr-namespace:ColorCross.ViewModel"
-        
-       mc:Ignorable="d"     
-        Title="MainWindow" Height="450" Width="800"
-    
+        xmlns:local1="clr-namespace:ColorCross.ViewModel"       
+        mc:Ignorable="d"     
+        Title="MainWindow" Height="450" Width="800"       
         Background="LightGray"
+        WindowStyle="None"
+       
         >
     <Window.DataContext>
         <local1:MainWindowViewModel></local1:MainWindowViewModel>
@@ -41,25 +41,29 @@
                        BorderThickness="0"
                        Foreground="White"
                        HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       FontFamily="Fonts/#redhat"
+                       VerticalAlignment="Center"                    
                        FontWeight="Medium"
                        Command="{Binding OpenGameMenuCommand}" Height="41" >
 
                 </Button>
 
-
-                <Button Content="Súgó"
+                <Button
+                    
+                       Content="Súgó"
                        Grid.Column="2"
                        Background="Transparent"
                        BorderThickness="0"
                        Foreground="White"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       FontFamily="Fonts/#redhat"
+                       HorizontalAlignment="Center"               
                        FontWeight="Medium"
-                        Command="{Binding OpenHelpCommand}"
+                       Command="{Binding OpenHelpCommand}"
                       />
+                <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                    <Button x:Name="min" Click="min_Click" Height="20PX" Width="30PX" FontSize="10px" >_</Button>
+                    <Button x:Name="full" Click="max_Click" Height="20PX" Width="30PX" FontSize="10px" FontFamily="webdings" >⛶</Button>
+                    <Button x:Name="exit" Click="exit_Click" Height="20PX" Width="30PX" FontSize="10px">X</Button>
+                </StackPanel>
 
             </Grid>
 
