@@ -1,4 +1,5 @@
-﻿using ColorCross.WindowFunctions;
+﻿using ColorCross.UserControls;
+using ColorCross.WindowFunctions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,6 +16,7 @@ namespace ColorCross
 			InitializeComponent();
 
 			Resizer.SetIntials(this);
+			closebutton.Visibility = Visibility.Collapsed;
 		}
 
 		private void exit_Click(object sender, RoutedEventArgs e)
@@ -37,5 +39,39 @@ namespace ColorCross
 			if (e.LeftButton == MouseButtonState.Pressed)
 				this.DragMove();
 		}
-	}
+
+		private void LevelSelector_Click(object sender, RoutedEventArgs e)
+		{
+			menu.Visibility = Visibility.Visible;
+			menu.Content = new LevelSelectUserControl();		
+			closebutton.Visibility = Visibility.Visible;
+			stackpanel.Visibility = Visibility.Collapsed;
+		}
+		private void Helper_click(object sender, RoutedEventArgs e)
+		{
+		
+			menu.Visibility = Visibility.Visible;
+			menu.Content = new HelpUserControl();	
+			closebutton.Visibility = Visibility.Visible;
+			stackpanel.Visibility = Visibility.Collapsed;
+
+
+		}
+		private void Upload_Click(object sender, RoutedEventArgs e)
+		{
+			menu.Visibility = Visibility.Visible;
+			menu.Content = new CustomImageUserControl();	
+			closebutton.Visibility = Visibility.Visible;
+			stackpanel.Visibility = Visibility.Collapsed;
+		}
+
+		private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+			menu.Visibility = Visibility.Collapsed;			
+			closebutton.Visibility = Visibility.Collapsed;
+			stackpanel.Visibility = Visibility.Visible;
+
+
+		}
+    }
 }

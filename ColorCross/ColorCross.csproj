@@ -5,9 +5,13 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+	 <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\pcsenior.ttf" />
+    <None Remove="Fonts\regular.ttf" />
+    <None Remove="Fonts\Webdings-Regular.ttf" />
     <None Remove="Images\apple.bmp" />
     <None Remove="Images\apple_logo.bmp" />
     <None Remove="Images\butterfly.bmp" />
@@ -95,7 +99,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Fonts\" />
+    <Resource Include="Fonts\regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\pcsenior.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Webdings-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

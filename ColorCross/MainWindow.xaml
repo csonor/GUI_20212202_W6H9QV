@@ -9,7 +9,7 @@
         Title="MainWindow" Height="450" Width="800"       
         Background="LightGray"
         WindowStyle="None"
-       
+        Style="{StaticResource CustomFont}"
         >
     <Window.DataContext>
         <local1:MainWindowViewModel></local1:MainWindowViewModel>
@@ -33,47 +33,32 @@
                     <ColumnDefinition/>
 
                 </Grid.ColumnDefinitions>
-                <Button 
-                   
-                        Content="Pályaválasztás"
-                       Grid.Column="1"
-                        Background="Transparent"
-                       BorderThickness="0"
-                       Foreground="White"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"                    
-                       FontWeight="Medium"
-                       Command="{Binding OpenGameMenuCommand}" Height="41" >
-
-                </Button>
-
-                <Button
+                <Button x:Name="closebutton" Click="BackButton_Click" Content="Vissza">
                     
-                       Content="Súgó"
-                       Grid.Column="2"
-                       Background="Transparent"
-                       BorderThickness="0"
-                       Foreground="White"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"               
-                       FontWeight="Medium"
-                       Command="{Binding OpenHelpCommand}"
-                      />
+                </Button>
                 <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
                     <Button x:Name="min" Click="min_Click" Height="20PX" Width="30PX" FontSize="10px" >_</Button>
                     <Button x:Name="full" Click="max_Click" Height="20PX" Width="30PX" FontSize="10px" FontFamily="webdings" >⛶</Button>
                     <Button x:Name="exit" Click="exit_Click" Height="20PX" Width="30PX" FontSize="10px">X</Button>
                 </StackPanel>
 
+               
             </Grid>
-
-            <ContentControl Grid.Row="1"
+            <ContentControl x:Name="menu"
+                            Grid.Row="1"
                             Grid.Column="0"
                             Margin="10,10,10,10"
                             HorizontalContentAlignment="Center"
-                            BorderThickness="0"
-                            Content="{Binding CurrentView}"
+                            BorderThickness="0"                         
                             />
+            
+            <StackPanel x:Name="stackpanel" Grid.Row="1" HorizontalAlignment="center" VerticalAlignment="center">
+                <Label HorizontalAlignment="Center"  Content="ColorCross" FontSize="100"></Label>
+                <Button Padding="10" x:Name="selectbutton" BorderBrush="Transparent" Background="Transparent"  Content="Játék" Click="LevelSelector_Click" FontSize="60"></Button>
+                <Button Padding="10" x:Name="helper" BorderBrush="Transparent" Background="Transparent"  FontSize="60" Content="Súgó" Click="Helper_click"></Button>
+                <Button Padding="10" x:Name="upload" BorderBrush="Transparent" Background="Transparent"  FontSize="60" Content="Egyéni kép importálása" Click="Upload_Click"></Button>
+            </StackPanel>
+
         </Grid>
     </Border>
 </Window>

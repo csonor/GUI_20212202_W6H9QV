@@ -43,6 +43,7 @@ namespace ColorCross.UserControls
 			var path = Directory.GetFiles(Path.Combine("Images"), "*bmp");
 			if (File.Exists("levels.json"))
 				completedLevels = JsonSerializer.Deserialize<List<string>>(File.ReadAllText("levels.json"));
+			wrp.HorizontalAlignment = HorizontalAlignment.Stretch;
 
 			wrp.Children.Clear();
 			for (int i = 0; i < path.Length; i++)
@@ -56,7 +57,7 @@ namespace ColorCross.UserControls
 					string fileName = new string(path[i].Split('\\')[1].TakeWhile(x => x != '.').ToArray());
 
 					wrp.Children.Add(new Button
-					{
+					{						
 						Name = fileName,
 						Margin = new Thickness(50),
 						Padding = new Thickness(50),
@@ -67,11 +68,12 @@ namespace ColorCross.UserControls
 				else
 					wrp.Children.Add(new Button
 					{
+						FontSize = 15,
 						Content = $"{bmp.Width} x {bmp.Height}",
 						Margin = new Thickness(50),
 						Padding = new Thickness(50),
 						Command = new RelayCommand(() => OpenGame(path[j]))
-					});
+					});;
 			}
 		}
 
