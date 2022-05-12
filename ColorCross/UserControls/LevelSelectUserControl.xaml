@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:ColorCross.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Background="#9c7200"
+             Background="LightGray"
 			 Loaded="UserControl_Loaded">
-	<UserControl.Resources>
+    <UserControl.Resources>
 		<ContextMenu x:Key="contextMenu">
 			<MenuItem Header="Reset"
                       Click="Reset_Click"
