@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace ColorCross
 {
@@ -16,7 +17,7 @@ namespace ColorCross
 	{
 		IColorCrossLogic logic = new ColorCrossLogic();
 		GameWindowViewModel VM;
-
+	
 		public GameWindow(string path)
 		{
 			logic.ImageReader(path);
@@ -39,6 +40,7 @@ namespace ColorCross
 			lstrows.ItemsSource = this.VM.Datas.Rows;
 		}
 
+	
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
 			Button b = (Button)sender;
@@ -73,7 +75,7 @@ namespace ColorCross
 
 		private void exit_Click(object sender, RoutedEventArgs e)
 		{
-			Resizer.Exit();
+			Resizer.Exit(this);
 		}
 
 		private void max_Click(object sender, RoutedEventArgs e)
@@ -85,6 +87,11 @@ namespace ColorCross
 		private void min_Click(object sender, RoutedEventArgs e)
 		{
 			Resizer.Minimize(this);
+		}
+		private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			if (e.LeftButton == MouseButtonState.Pressed)
+				this.DragMove();
 		}
 	}
 
